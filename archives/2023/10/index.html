@@ -27,7 +27,7 @@
     <script class="keep-theme-configurations">
     const KEEP = window.KEEP || {}
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.json"}
-    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":false,"init_open":true,"layout":"right"},"style":{"primary_color":"#0066cc","logo":"/images/logo.svg","favicon":"/images/logo.svg","avatar":"/images/avatar.svg","first_screen":{"enable":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"scroll":{"progress_bar":true,"percent":false}},"local_search":{"enable":true,"preload":true},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"obsidian"},"pjax":{"enable":true},"lazyload":{"enable":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false}},"post":{"author_label":{"enable":false,"auto":false,"custom_label_list":["Trainee","Engineer","Architect"]},"word_count":{"wordcount":true,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"version":"3.8.5"}
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"style":{"primary_color":"#FFFFFF","logo":"/images/logo.svg","favicon":"/images/logo.svg","avatar":"/images/avatar.svg","first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":true},"scroll":{"progress_bar":true,"percent":false}},"local_search":{"enable":true,"preload":true},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"obsidian"},"pjax":{"enable":true},"lazyload":{"enable":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false}},"post":{"author_label":{"enable":false,"auto":false,"custom_label_list":["Trainee","Engineer","Architect"]},"word_count":{"wordcount":true,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"version":"3.8.5"}
     KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
     KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
     KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
@@ -154,95 +154,26 @@
                     <div class="fade-in-down-animation">
     <div class="archives-container">
         <div class="archives-timeline border-box">
-            $archive-year-font-size = 1.6rem
-$article-title-font-size = 1.2rem
-$article-date-font-size = 1rem
-$article-date-width = 3.6rem
-$article-item-padding = 1.2rem
-$timeline-circle-width = 0.6rem
-
-.archive-list-container {
-
-  .archive-item {
-    margin-bottom var(--components-spacing)
-
-    &:last-child {
-      margin-bottom 0
-    }
-
-    .archive-item-header {
-      margin-bottom 0.8rem
-
-      .archive-year {
-        margin-right 6px
-        color var(--text-color-2)
-        font-weight 600
-        font-size $archive-year-font-size
-
-        +keep-tablet() {
-          font-size $archive-year-font-size * 0.9
-        }
-      }
-    }
-
-
-    .article-list {
-      padding-left $article-item-padding
-
-
-      .article-item {
-        display flex
-        align-items center
-        justify-content space-between
-        width 100%
-        padding ($article-item-padding * 0.68) 0 ($article-item-padding * 0.68) $article-item-padding
-        font-size 1rem
-        border-left 1px dashed var(--border-color)
-
-        &::before {
-          position absolute
-          top 50%
-          left -($timeline-circle-width * 0.5)
-          z-index $z-index-1
-          box-sizing border-box
-          width $timeline-circle-width
-          height $timeline-circle-width
-          background var(--text-color-5)
-          border-radius 50%
-          transform translateY(-50%)
-          content ''
-        }
-
-
-        &:hover {
-          &::before {
-            background var(--text-color-4)
-          }
-
-
-          a.article-title {
-            color var(--primary-color)
-          }
-        }
-
-        .article-date {
-          width $article-date-width
-          margin-right $article-item-padding
-          color var(--text-color-3)
-          font-size $article-date-font-size
-        }
-
-
-        a.article-title {
-          width 'calc(100% - %s)' % $article-date-width
-          color var(--text-color-3)
-        }
-      }
-    }
-  }
-}
-
-
+            
+<div class="archive-list-container border-box">
+    
+        <section class="archive-item border-box">
+            <div class="archive-item-header border-box">
+                <span class="archive-year">2023</span>
+            </div>
+            <ul class="article-list border-box">
+                
+                    <li class="article-item border-box">
+                        <span class="article-date border-box">10-19</span>
+                        <a class="article-title border-box text-ellipsis"
+                           href="/2023/10/19/test/"
+                        >test</a>
+                    </li>
+                
+            </ul>
+        </section>
+    
+</div>
 
         </div>
     </div>
