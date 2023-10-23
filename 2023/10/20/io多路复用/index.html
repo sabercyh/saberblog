@@ -209,7 +209,7 @@
 
             <span class="meta-info-item article-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="pc" data-updated="Mon Oct 23 2023 16:27:20 GMT+0800">2023-10-23 16:27:20</span>
+                <span class="pc" data-updated="Mon Oct 23 2023 19:51:10 GMT+0800">2023-10-23 19:51:10</span>
             </span>
         
 
@@ -273,7 +273,7 @@
 <li>需要对文件描述符进行遍历，时间复杂度O(n)</li>
 </ol>
 </blockquote>
-<h1 id="poll"><a href="#poll" class="headerlink" title="poll"></a>poll</h1><h2 id="poll结构体"><a href="#poll结构体" class="headerlink" title="poll结构体"></a>poll结构体</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">struct pollfd &#123;</span><br><span class="line">    int fd;         //文件描述符</span><br><span class="line">    short events;   //注册事件</span><br><span class="line">    short revents;  //实际发生事件，由内核填充</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="poll"><a href="#poll" class="headerlink" title="poll"></a>poll</h1><h2 id="poll结构体"><a href="#poll结构体" class="headerlink" title="poll结构体"></a>poll结构体</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">pollfd</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> fd;         <span class="comment">//文件描述符</span></span><br><span class="line">    <span class="type">short</span> events;   <span class="comment">//注册事件</span></span><br><span class="line">    <span class="type">short</span> revents;  <span class="comment">//实际发生事件，由内核填充</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="执行原理-1"><a href="#执行原理-1" class="headerlink" title="执行原理"></a>执行原理</h2><blockquote>
 <ol>
 <li>将当前进程的所有文件描述符（socket连接），一次性从用户态拷贝到内核态</li>
@@ -292,7 +292,7 @@
 <h1 id="epoll"><a href="#epoll" class="headerlink" title="epoll"></a>epoll</h1><h2 id="执行原理-2"><a href="#执行原理-2" class="headerlink" title="执行原理"></a>执行原理</h2><blockquote>
 <p>eventpoll结构体</p>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">struct eventpill&#123;</span><br><span class="line">    rdylist     已就绪事件队列</span><br><span class="line">    rbr         红黑树，存储文件描述符</span><br><span class="line">    wq          阻塞进程等待队列</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">eventpill</span>&#123;</span></span><br><span class="line">    rdylist     已就绪事件队列</span><br><span class="line">    rbr         红黑树，存储文件描述符</span><br><span class="line">    wq          阻塞进程等待队列</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <ol>
 <li>epoll_create创建eventpoll</li>
