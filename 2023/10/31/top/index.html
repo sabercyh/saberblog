@@ -9,7 +9,7 @@
     
     <title>
         
-            操作系统八股 |
+            置顶 |
         
         saberblog
     </title>
@@ -169,9 +169,9 @@
                      style="height: 120px"
                 >
                     <div class="cover-article-title">
-                        操作系统八股
+                        top
                     </div>
-                    <img class="post-cover" src="/images/bg5.png"
+                    <img class="post-cover" src="/images/bg2.png"
                          onerror="this.style.display='none'"
                     >
                 </div>
@@ -203,13 +203,13 @@
         
             <span class="meta-info-item article-create-date">
                 <i class="icon fa-solid fa-calendar-check"></i>&nbsp;
-                <span class="pc">2023-10-24 20:31:36</span>
-                <span class="mobile">2023-10-24 20:31</span>
+                <span class="pc">2023-10-31 11:29:52</span>
+                <span class="mobile">2023-10-31 11:29</span>
             </span>
 
             <span class="meta-info-item article-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="pc" data-updated="Tue Oct 24 2023 21:29:31 GMT+0800">2023-10-24 21:29:31</span>
+                <span class="pc" data-updated="Tue Oct 31 2023 11:59:58 GMT+0800">2023-10-31 11:59:58</span>
             </span>
         
 
@@ -217,7 +217,7 @@
             <span class="meta-info-item article-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
                 <ul class="article-category-ul">
                     
-                            <li class="category-item"><a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></li>
+                            <li class="category-item"><a href="/categories/Linux/">Linux</a></li>
                         
                     
                 </ul>
@@ -229,7 +229,10 @@
                 <i class="icon fas fa-tags"></i>&nbsp;
                 <ul class="article-tag-ul">
                     
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></li>
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Linux%E5%91%BD%E4%BB%A4/">Linux命令</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/top%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/">top命令详解</a></li>
                         
                     
                 </ul>
@@ -257,77 +260,60 @@
                 <div class="article-content keep-markdown-body">
                     
 
-                    <h1 id="1-用户态和内核态"><a href="#1-用户态和内核态" class="headerlink" title="1. 用户态和内核态"></a>1. 用户态和内核态</h1><h2 id="1-1-介绍"><a href="#1-1-介绍" class="headerlink" title="1.1 介绍"></a>1.1 介绍</h2><blockquote>
-<ul>
-<li>用户态：用户态运行的程序可以直接去读用户程序的数据，拥有的权限较低。当应用程序需要执行某些特殊权限操作时，如磁盘IO、网络通信等，需要向操作系统发起系统调用请求，进入内核态。</li>
-<li>内核态：内核态运行的进程可以访问计算机的任何资源，包括内存空间、设备、驱动程序等，拥有较高的权限。操作系统接收到进程的系统调用请求时，会从用户态切换到内核态，执行响应的系统调用，将结果返回给用户态进程后，会从内核态切换回用户态。</li>
-</ul>
+                    <h1 id="top"><a href="#top" class="headerlink" title="top"></a>top</h1><p><img  
+                     lazyload
+                     alt="image"
+                     data-src="/2023/10/31/top/top%E7%BB%93%E6%9E%9C.png"
+                      alt="top命令" title="top命令"
+                ></p>
+<h2 id="第一行，系统整体信息"><a href="#第一行，系统整体信息" class="headerlink" title="第一行，系统整体信息"></a>第一行，系统整体信息</h2><p><img  
+                     lazyload
+                     alt="image"
+                     data-src="/2023/10/31/top/top%E7%AC%AC%E4%B8%80%E8%A1%8C.png"
+                      alt="top第一行" title="top第一行"
+                ></p>
+<blockquote>
+<ol>
+<li>系统当前时间</li>
+<li>系统运行时间    </li>
+<li>当前登陆用户数  </li>
+<li>系统负载(平均队列长度)，三个数值依次表示1min，5min，15min前到现在的平均值</li>
+</ol>
 </blockquote>
-<h2 id="1-2-区分用户态和内核态的好处"><a href="#1-2-区分用户态和内核态的好处" class="headerlink" title="1.2 区分用户态和内核态的好处"></a>1.2 区分用户态和内核态的好处</h2><blockquote>
-<ul>
-<li>提高系统安全性，如果所有进程都能执行特权指令可能会严重影响系统运行。</li>
-<li>如果只有一个内核态，所有进程共享系统资源，将会导致大量的系统资源竞争和冲突，降低系统运行性能。</li>
-</ul>
+<h2 id="第二行，进程信息"><a href="#第二行，进程信息" class="headerlink" title="第二行，进程信息"></a>第二行，进程信息</h2><p><img  
+                     lazyload
+                     alt="image"
+                     data-src="/2023/10/31/top/top%E7%AC%AC%E4%BA%8C%E8%A1%8C.png"
+                      alt="top第二行" title="top第二行"
+                ></p>
+<blockquote>
+<p>total:    进程总数<br>running:    正在运行的进程数<br>sleeping:     睡眠进程数<br>stopped:      停止的进程数<br>zombie:       僵尸进程数</p>
 </blockquote>
-<h2 id="1-3-切换方式"><a href="#1-3-切换方式" class="headerlink" title="1.3 切换方式"></a>1.3 切换方式</h2><blockquote>
-<ul>
-<li>系统调用(Trap):用户进程主动切换到内核态的一种方式，如磁盘IO读写，核心机制是通过一个中断实现用户态到内核态的转换，执行结束返回时再次通过中断回到用户态。</li>
-<li>中断:外部设备执行完相关操作后，向CPU发出中断信号，如果此时先前执行的指令是用户态指令，则需要进行切换。</li>
-<li>异常:如缺页异常，与中断的区别是中断来自外部，异常来自于先前执行指令的问题。</li>
-</ul>
+<h2 id="第三行，CPU信息"><a href="#第三行，CPU信息" class="headerlink" title="第三行，CPU信息"></a>第三行，CPU信息</h2><p><img  
+                     lazyload
+                     alt="image"
+                     data-src="/2023/10/31/top/top%E7%AC%AC%E4%B8%89%E8%A1%8C.png"
+                      alt="top第三行" title="top第三行"
+                ></p>
+<blockquote>
+<p>us:   用户空间占用CPU百分比<br>sy:   内核空间占用CPU百分比<br>ni:   用户进程空间内改变过优先级的进程占用CPU百分比<br>id:   空闲CPU百分比<br>wa:   等待输入输出的CPU百分比<br>hi:   硬中断占用CPU百分比<br>si:   软中断占用CPU百分比<br>st:   (Steal time) 是当 hypervisor 服务另一个虚拟处理器的时候，虚拟 CPU 等待实际 CPU 的时间的百分比。</p>
 </blockquote>
-<h1 id="2-进程和线程"><a href="#2-进程和线程" class="headerlink" title="2. 进程和线程"></a>2. 进程和线程</h1><h2 id="2-1-介绍"><a href="#2-1-介绍" class="headerlink" title="2.1 介绍"></a>2.1 介绍</h2><blockquote>
-<ul>
-<li>进程：程序运行的实力，系统资源分配的最小单位</li>
-<li>线程：轻量级进程，系统调度的基本单位。占有资源包括自身的程序计数器和本地方法栈等。</li>
-<li>协程：用户级线程，切换时不需要切换到内核态</li>
-</ul>
+<h2 id="第四行，内存信息"><a href="#第四行，内存信息" class="headerlink" title="第四行，内存信息"></a>第四行，内存信息</h2><p><img  
+                     lazyload
+                     alt="image"
+                     data-src="/2023/10/31/top/top%E7%AC%AC%E5%9B%9B%E8%A1%8C.png"
+                      alt="top第四行" title="top第四行"
+                ></p>
+<blockquote>
+<p>total:    物理内存总量<br>free:     空闲内存总量<br>used:     使用的物理内存总量<br>buff&#x2F;cache: 用作内核缓存的内存量</p>
 </blockquote>
-<h3 id="2-1-1-线程相比于进程的优势"><a href="#2-1-1-线程相比于进程的优势" class="headerlink" title="2.1.1 线程相比于进程的优势"></a>2.1.1 线程相比于进程的优势</h3><blockquote>
-<ul>
-<li>线程切换成本低，且切换时不需要切换关键的TLB</li>
-<li>线程更轻量，一个进程可创建多个线程，实现并发处理任务</li>
-<li>同一个进程内的线程可以共享内存和文件，不需要调用内核切换</li>
-</ul>
-</blockquote>
-<h3 id="2-1-2-协程相比于线程的优势"><a href="#2-1-2-协程相比于线程的优势" class="headerlink" title="2.1.2 协程相比于线程的优势"></a>2.1.2 协程相比于线程的优势</h3><blockquote>
-<ul>
-<li>占用资源相较于线程更少</li>
-<li>切换时不需要陷入内核态</li>
-</ul>
-</blockquote>
-<h3 id="2-2-进程的状态"><a href="#2-2-进程的状态" class="headerlink" title="2.2 进程的状态"></a>2.2 进程的状态</h3><blockquote>
-<p>创建，就绪，运行，阻塞,结束</p>
-</blockquote>
-<h3 id="2-3-进程间通信方式"><a href="#2-3-进程间通信方式" class="headerlink" title="2.3 进程间通信方式"></a>2.3 进程间通信方式</h3><blockquote>
-<p>共享内存，socket套接字，管道，有名管道，共享内存，消息队列</p>
-</blockquote>
-<h3 id="2-4-进程调度算法"><a href="#2-4-进程调度算法" class="headerlink" title="2.4 进程调度算法"></a>2.4 进程调度算法</h3><blockquote>
-<p>先来先服务，短作业优先，时间片轮询，多级反馈队列，优先级调度</p>
-</blockquote>
-<h1 id="3-死锁"><a href="#3-死锁" class="headerlink" title="3. 死锁"></a>3. 死锁</h1><h2 id="3-1-死锁产生的必要条件"><a href="#3-1-死锁产生的必要条件" class="headerlink" title="3.1 死锁产生的必要条件"></a>3.1 死锁产生的必要条件</h2><blockquote>
-<p>互斥，非抢占，不可剥夺，循环等待</p>
-</blockquote>
-<h2 id="3-2-死锁预防"><a href="#3-2-死锁预防" class="headerlink" title="3.2 死锁预防"></a>3.2 死锁预防</h2><blockquote>
-<p>破坏必要条件之一</p>
-</blockquote>
-<h2 id="3-3-死锁避免"><a href="#3-3-死锁避免" class="headerlink" title="3.3 死锁避免"></a>3.3 死锁避免</h2><blockquote>
-<p>银行家算法</p>
-</blockquote>
-<h2 id="3-4-死锁检测"><a href="#3-4-死锁检测" class="headerlink" title="3.4 死锁检测"></a>3.4 死锁检测</h2><blockquote>
-<p>进程资源状态图</p>
-</blockquote>
-<h1 id="4-内存管理"><a href="#4-内存管理" class="headerlink" title="4. 内存管理"></a>4. 内存管理</h1><h2 id="虚拟内存的作用"><a href="#虚拟内存的作用" class="headerlink" title="虚拟内存的作用"></a>虚拟内存的作用</h2><blockquote>
-<p>隔离进程，提高安全性<br>提高内存利用率，逻辑上扩充内存空间<br>简化内存管理，程序员不需要直接操作物理内存</p>
-</blockquote>
-<h2 id="非连续内存管理"><a href="#非连续内存管理" class="headerlink" title="非连续内存管理"></a>非连续内存管理</h2><blockquote>
-<p>段式管理：根据段号查段表，找到实际其实物理地址，加上段内偏移<br>页式管理：根据页号查页表，找到实际其实物理地址，加上段内偏移<br>段页式管理：先取段地址，然后页地址</p>
-</blockquote>
-<h1 id="5-软硬连接"><a href="#5-软硬连接" class="headerlink" title="5. 软硬连接"></a>5. 软硬连接</h1><blockquote>
-<ul>
-<li>硬连接(ln)：硬连接和源文件inode节点号相同，删了源文件还能查看，由于inode节点号每个文件系统唯一，所以硬连接不能跨文件系统。</li>
-<li>软连接(ln -s)：类似快捷方式，存的是源文件路径，删了源文件无法查看。</li>
-</ul>
+<h2 id="第五行，交换区信息"><a href="#第五行，交换区信息" class="headerlink" title="第五行，交换区信息"></a>第五行，交换区信息</h2><blockquote>
+<p>记录已存在内存中的交换区数据大小；内存中的内容被换出到交换区，而后又被换入内存，但使用过的交换区未被覆盖，相应的内存再次被换出时不需要再次写入。<br><img  
+                     lazyload
+                     alt="image"
+                     data-src="/2023/10/31/top/top%E7%AC%AC%E4%BA%94%E8%A1%8C.png"
+                      alt="top第五行" title="top第五行"
+                ><br>total:    交换区总量<br>free:     空闲交换区总量<br>used:     使用的交换区总量<br>avail Mem:    缓冲的交换区总量</p>
 </blockquote>
 
                 </div>
@@ -340,7 +326,11 @@
                             <ul class="post-tags-box border-box">
                                 
                                     <li class="tag-item border-box">
-                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/Linux%E5%91%BD%E4%BB%A4/">Linux命令</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/top%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/">top命令详解</a>
                                     </li>
                                 
                             </ul>
@@ -356,31 +346,15 @@
                 
                     <div class="article-nav">
                         
-                            <div class="article-prev">
-                                <a class="prev"
-                                   rel="prev"
-                                   href="/2023/10/31/top/"
-                                   title="top"
-                                >
-                                    <span class="left arrow-icon flex-center">
-                                      <i class="fas fa-chevron-left"></i>
-                                    </span>
-                                            <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">top</span>
-                                        <span class="post-nav-item">上一篇</span>
-                                    </span>
-                                </a>
-                            </div>
-                        
                         
                             <div class="article-next">
                                 <a class="next"
                                    rel="next"
-                                   href="/2023/10/24/LRU/"
-                                   title="LRU"
+                                   href="/2023/10/24/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%85%AB%E8%82%A1/"
+                                   title="操作系统八股"
                                 >
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">LRU</span>
+                                        <span class="post-nav-title-item text-ellipsis">操作系统八股</span>
                                         <span class="post-nav-item">下一篇</span>
                                     </span>
                                             <span class="right arrow-icon flex-center">
@@ -408,7 +382,7 @@
             <div class="pc-post-toc right-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E7%94%A8%E6%88%B7%E6%80%81%E5%92%8C%E5%86%85%E6%A0%B8%E6%80%81"><span class="nav-text">1. 用户态和内核态</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E4%BB%8B%E7%BB%8D"><span class="nav-text">1.1 介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E5%8C%BA%E5%88%86%E7%94%A8%E6%88%B7%E6%80%81%E5%92%8C%E5%86%85%E6%A0%B8%E6%80%81%E7%9A%84%E5%A5%BD%E5%A4%84"><span class="nav-text">1.2 区分用户态和内核态的好处</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-%E5%88%87%E6%8D%A2%E6%96%B9%E5%BC%8F"><span class="nav-text">1.3 切换方式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B"><span class="nav-text">2. 进程和线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E4%BB%8B%E7%BB%8D"><span class="nav-text">2.1 介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-1-%E7%BA%BF%E7%A8%8B%E7%9B%B8%E6%AF%94%E4%BA%8E%E8%BF%9B%E7%A8%8B%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="nav-text">2.1.1 线程相比于进程的优势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-2-%E5%8D%8F%E7%A8%8B%E7%9B%B8%E6%AF%94%E4%BA%8E%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="nav-text">2.1.2 协程相比于线程的优势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E8%BF%9B%E7%A8%8B%E7%9A%84%E7%8A%B6%E6%80%81"><span class="nav-text">2.2 进程的状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F"><span class="nav-text">2.3 进程间通信方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95"><span class="nav-text">2.4 进程调度算法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E6%AD%BB%E9%94%81"><span class="nav-text">3. 死锁</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E6%AD%BB%E9%94%81%E4%BA%A7%E7%94%9F%E7%9A%84%E5%BF%85%E8%A6%81%E6%9D%A1%E4%BB%B6"><span class="nav-text">3.1 死锁产生的必要条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E6%AD%BB%E9%94%81%E9%A2%84%E9%98%B2"><span class="nav-text">3.2 死锁预防</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-%E6%AD%BB%E9%94%81%E9%81%BF%E5%85%8D"><span class="nav-text">3.3 死锁避免</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-%E6%AD%BB%E9%94%81%E6%A3%80%E6%B5%8B"><span class="nav-text">3.4 死锁检测</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="nav-text">4. 内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-text">虚拟内存的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%9E%E8%BF%9E%E7%BB%AD%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="nav-text">非连续内存管理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E8%BD%AF%E7%A1%AC%E8%BF%9E%E6%8E%A5"><span class="nav-text">5. 软硬连接</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#top"><span class="nav-text">top</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E8%A1%8C%EF%BC%8C%E7%B3%BB%E7%BB%9F%E6%95%B4%E4%BD%93%E4%BF%A1%E6%81%AF"><span class="nav-text">第一行，系统整体信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E8%A1%8C%EF%BC%8C%E8%BF%9B%E7%A8%8B%E4%BF%A1%E6%81%AF"><span class="nav-text">第二行，进程信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E8%A1%8C%EF%BC%8CCPU%E4%BF%A1%E6%81%AF"><span class="nav-text">第三行，CPU信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E8%A1%8C%EF%BC%8C%E5%86%85%E5%AD%98%E4%BF%A1%E6%81%AF"><span class="nav-text">第四行，内存信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E8%A1%8C%EF%BC%8C%E4%BA%A4%E6%8D%A2%E5%8C%BA%E4%BF%A1%E6%81%AF"><span class="nav-text">第五行，交换区信息</span></a></li></ol></li></ol>
     </div>
 </div>
 
@@ -577,7 +551,7 @@
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E7%94%A8%E6%88%B7%E6%80%81%E5%92%8C%E5%86%85%E6%A0%B8%E6%80%81"><span class="nav-text">1. 用户态和内核态</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E4%BB%8B%E7%BB%8D"><span class="nav-text">1.1 介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E5%8C%BA%E5%88%86%E7%94%A8%E6%88%B7%E6%80%81%E5%92%8C%E5%86%85%E6%A0%B8%E6%80%81%E7%9A%84%E5%A5%BD%E5%A4%84"><span class="nav-text">1.2 区分用户态和内核态的好处</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-%E5%88%87%E6%8D%A2%E6%96%B9%E5%BC%8F"><span class="nav-text">1.3 切换方式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B"><span class="nav-text">2. 进程和线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E4%BB%8B%E7%BB%8D"><span class="nav-text">2.1 介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-1-%E7%BA%BF%E7%A8%8B%E7%9B%B8%E6%AF%94%E4%BA%8E%E8%BF%9B%E7%A8%8B%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="nav-text">2.1.1 线程相比于进程的优势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-2-%E5%8D%8F%E7%A8%8B%E7%9B%B8%E6%AF%94%E4%BA%8E%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="nav-text">2.1.2 协程相比于线程的优势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E8%BF%9B%E7%A8%8B%E7%9A%84%E7%8A%B6%E6%80%81"><span class="nav-text">2.2 进程的状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F"><span class="nav-text">2.3 进程间通信方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95"><span class="nav-text">2.4 进程调度算法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E6%AD%BB%E9%94%81"><span class="nav-text">3. 死锁</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E6%AD%BB%E9%94%81%E4%BA%A7%E7%94%9F%E7%9A%84%E5%BF%85%E8%A6%81%E6%9D%A1%E4%BB%B6"><span class="nav-text">3.1 死锁产生的必要条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E6%AD%BB%E9%94%81%E9%A2%84%E9%98%B2"><span class="nav-text">3.2 死锁预防</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-%E6%AD%BB%E9%94%81%E9%81%BF%E5%85%8D"><span class="nav-text">3.3 死锁避免</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-%E6%AD%BB%E9%94%81%E6%A3%80%E6%B5%8B"><span class="nav-text">3.4 死锁检测</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="nav-text">4. 内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-text">虚拟内存的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%9E%E8%BF%9E%E7%BB%AD%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="nav-text">非连续内存管理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E8%BD%AF%E7%A1%AC%E8%BF%9E%E6%8E%A5"><span class="nav-text">5. 软硬连接</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#top"><span class="nav-text">top</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E8%A1%8C%EF%BC%8C%E7%B3%BB%E7%BB%9F%E6%95%B4%E4%BD%93%E4%BF%A1%E6%81%AF"><span class="nav-text">第一行，系统整体信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E8%A1%8C%EF%BC%8C%E8%BF%9B%E7%A8%8B%E4%BF%A1%E6%81%AF"><span class="nav-text">第二行，进程信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E8%A1%8C%EF%BC%8CCPU%E4%BF%A1%E6%81%AF"><span class="nav-text">第三行，CPU信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E8%A1%8C%EF%BC%8C%E5%86%85%E5%AD%98%E4%BF%A1%E6%81%AF"><span class="nav-text">第四行，内存信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E8%A1%8C%EF%BC%8C%E4%BA%A4%E6%8D%A2%E5%8C%BA%E4%BF%A1%E6%81%AF"><span class="nav-text">第五行，交换区信息</span></a></li></ol></li></ol>
     </div>
 </div>
 
