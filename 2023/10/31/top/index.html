@@ -209,7 +209,7 @@
 
             <span class="meta-info-item article-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="pc" data-updated="Tue Oct 31 2023 11:59:58 GMT+0800">2023-10-31 11:59:58</span>
+                <span class="pc" data-updated="Tue Oct 31 2023 14:46:53 GMT+0800">2023-10-31 14:46:53</span>
             </span>
         
 
@@ -260,7 +260,7 @@
                 <div class="article-content keep-markdown-body">
                     
 
-                    <h1 id="top"><a href="#top" class="headerlink" title="top"></a>top</h1><p><img  
+                    <h1 id="1-top结果详解"><a href="#1-top结果详解" class="headerlink" title="1. top结果详解"></a>1. top结果详解</h1><p><img  
                      lazyload
                      alt="image"
                      data-src="/2023/10/31/top/top%E7%BB%93%E6%9E%9C.png"
@@ -314,6 +314,20 @@
                      data-src="/2023/10/31/top/top%E7%AC%AC%E4%BA%94%E8%A1%8C.png"
                       alt="top第五行" title="top第五行"
                 ><br>total:    交换区总量<br>free:     空闲交换区总量<br>used:     使用的交换区总量<br>avail Mem:    缓冲的交换区总量</p>
+</blockquote>
+<h2 id="进程信息区"><a href="#进程信息区" class="headerlink" title="进程信息区"></a>进程信息区</h2><blockquote>
+<p>默认显示PID、USER、PR、NI、VIRT、RES、SHR、S、%CPU、%MEM、TIME+、COMMAND</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">PID:进程ID</span><br><span class="line">PPID:父进程ID</span><br><span class="line">UID:进程所有者用户ID</span><br><span class="line">USER:进程所有者用户名</span><br><span class="line">PR:进程优先级</span><br><span class="line">NI:nice值，负值表示高优先级，正值表示低优先级</span><br><span class="line">%CPU:上次更新到现在的CPU时间占用百分比</span><br><span class="line">TIME+:进程使用的CPU总时间</span><br><span class="line">%MEM:进程使用的物理内存百分比</span><br><span class="line">CODE:可执行代码占用物理内存的大小，单位kb</span><br><span class="line">DATA:可执行代码以外的部分(数据段和栈)占用的物理内存大小，单位kb</span><br><span class="line">RES:进程正在使用的、未被换出的物理内存大小，单位kb，RES=CODE+DATA</span><br><span class="line">SWAP:进程使用的虚拟内存中，被换出的大小，单位kb</span><br><span class="line">VIRT:进程使用的虚拟内存总量，单位kb，VIRT=SWAP+RES</span><br><span class="line">SHR:共享内存大小，单位kb</span><br><span class="line">nFLT:页面错误次数</span><br><span class="line">nDRT:最后一次写入到现在，被修改过页面数量</span><br><span class="line">S:进程状态</span><br><span class="line">COMMAND:运行进程的命令</span><br></pre></td></tr></table></figure>
+<h1 id="2-可用选项"><a href="#2-可用选项" class="headerlink" title="2. 可用选项"></a>2. 可用选项</h1><blockquote>
+<p>-d 后跟秒数，表示指定两次刷新的时间间隔<br>-p 后跟进程PID，查询指定进程信息<br>-b 批处理，输出内容到文件时需要<br>-n 指定刷新次数</p>
+</blockquote>
+<h2 id="举例：每2-5秒刷新一次top内容，总计5次，并将结束输出到top-txt文件"><a href="#举例：每2-5秒刷新一次top内容，总计5次，并将结束输出到top-txt文件" class="headerlink" title="举例：每2.5秒刷新一次top内容，总计5次，并将结束输出到top.txt文件"></a>举例：每2.5秒刷新一次top内容，总计5次，并将结束输出到top.txt文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">top -b -d 2.5 -n 5 &gt; top.txt</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>P:对%CPU列排序<br>M:对%MEM列排序<br>T:对TIME+列排序<br>R:逆序</p>
+</blockquote>
+<blockquote>
+<p>f:显示或隐藏列</p>
 </blockquote>
 
                 </div>
@@ -382,7 +396,7 @@
             <div class="pc-post-toc right-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#top"><span class="nav-text">top</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E8%A1%8C%EF%BC%8C%E7%B3%BB%E7%BB%9F%E6%95%B4%E4%BD%93%E4%BF%A1%E6%81%AF"><span class="nav-text">第一行，系统整体信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E8%A1%8C%EF%BC%8C%E8%BF%9B%E7%A8%8B%E4%BF%A1%E6%81%AF"><span class="nav-text">第二行，进程信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E8%A1%8C%EF%BC%8CCPU%E4%BF%A1%E6%81%AF"><span class="nav-text">第三行，CPU信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E8%A1%8C%EF%BC%8C%E5%86%85%E5%AD%98%E4%BF%A1%E6%81%AF"><span class="nav-text">第四行，内存信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E8%A1%8C%EF%BC%8C%E4%BA%A4%E6%8D%A2%E5%8C%BA%E4%BF%A1%E6%81%AF"><span class="nav-text">第五行，交换区信息</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-top%E7%BB%93%E6%9E%9C%E8%AF%A6%E8%A7%A3"><span class="nav-text">1. top结果详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E8%A1%8C%EF%BC%8C%E7%B3%BB%E7%BB%9F%E6%95%B4%E4%BD%93%E4%BF%A1%E6%81%AF"><span class="nav-text">第一行，系统整体信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E8%A1%8C%EF%BC%8C%E8%BF%9B%E7%A8%8B%E4%BF%A1%E6%81%AF"><span class="nav-text">第二行，进程信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E8%A1%8C%EF%BC%8CCPU%E4%BF%A1%E6%81%AF"><span class="nav-text">第三行，CPU信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E8%A1%8C%EF%BC%8C%E5%86%85%E5%AD%98%E4%BF%A1%E6%81%AF"><span class="nav-text">第四行，内存信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E8%A1%8C%EF%BC%8C%E4%BA%A4%E6%8D%A2%E5%8C%BA%E4%BF%A1%E6%81%AF"><span class="nav-text">第五行，交换区信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E4%BF%A1%E6%81%AF%E5%8C%BA"><span class="nav-text">进程信息区</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E5%8F%AF%E7%94%A8%E9%80%89%E9%A1%B9"><span class="nav-text">2. 可用选项</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BE%E4%BE%8B%EF%BC%9A%E6%AF%8F2-5%E7%A7%92%E5%88%B7%E6%96%B0%E4%B8%80%E6%AC%A1top%E5%86%85%E5%AE%B9%EF%BC%8C%E6%80%BB%E8%AE%A15%E6%AC%A1%EF%BC%8C%E5%B9%B6%E5%B0%86%E7%BB%93%E6%9D%9F%E8%BE%93%E5%87%BA%E5%88%B0top-txt%E6%96%87%E4%BB%B6"><span class="nav-text">举例：每2.5秒刷新一次top内容，总计5次，并将结束输出到top.txt文件</span></a></li></ol></li></ol>
     </div>
 </div>
 
@@ -551,7 +565,7 @@
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#top"><span class="nav-text">top</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E8%A1%8C%EF%BC%8C%E7%B3%BB%E7%BB%9F%E6%95%B4%E4%BD%93%E4%BF%A1%E6%81%AF"><span class="nav-text">第一行，系统整体信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E8%A1%8C%EF%BC%8C%E8%BF%9B%E7%A8%8B%E4%BF%A1%E6%81%AF"><span class="nav-text">第二行，进程信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E8%A1%8C%EF%BC%8CCPU%E4%BF%A1%E6%81%AF"><span class="nav-text">第三行，CPU信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E8%A1%8C%EF%BC%8C%E5%86%85%E5%AD%98%E4%BF%A1%E6%81%AF"><span class="nav-text">第四行，内存信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E8%A1%8C%EF%BC%8C%E4%BA%A4%E6%8D%A2%E5%8C%BA%E4%BF%A1%E6%81%AF"><span class="nav-text">第五行，交换区信息</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-top%E7%BB%93%E6%9E%9C%E8%AF%A6%E8%A7%A3"><span class="nav-text">1. top结果详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E8%A1%8C%EF%BC%8C%E7%B3%BB%E7%BB%9F%E6%95%B4%E4%BD%93%E4%BF%A1%E6%81%AF"><span class="nav-text">第一行，系统整体信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E8%A1%8C%EF%BC%8C%E8%BF%9B%E7%A8%8B%E4%BF%A1%E6%81%AF"><span class="nav-text">第二行，进程信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E8%A1%8C%EF%BC%8CCPU%E4%BF%A1%E6%81%AF"><span class="nav-text">第三行，CPU信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E8%A1%8C%EF%BC%8C%E5%86%85%E5%AD%98%E4%BF%A1%E6%81%AF"><span class="nav-text">第四行，内存信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E8%A1%8C%EF%BC%8C%E4%BA%A4%E6%8D%A2%E5%8C%BA%E4%BF%A1%E6%81%AF"><span class="nav-text">第五行，交换区信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E4%BF%A1%E6%81%AF%E5%8C%BA"><span class="nav-text">进程信息区</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E5%8F%AF%E7%94%A8%E9%80%89%E9%A1%B9"><span class="nav-text">2. 可用选项</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BE%E4%BE%8B%EF%BC%9A%E6%AF%8F2-5%E7%A7%92%E5%88%B7%E6%96%B0%E4%B8%80%E6%AC%A1top%E5%86%85%E5%AE%B9%EF%BC%8C%E6%80%BB%E8%AE%A15%E6%AC%A1%EF%BC%8C%E5%B9%B6%E5%B0%86%E7%BB%93%E6%9D%9F%E8%BE%93%E5%87%BA%E5%88%B0top-txt%E6%96%87%E4%BB%B6"><span class="nav-text">举例：每2.5秒刷新一次top内容，总计5次，并将结束输出到top.txt文件</span></a></li></ol></li></ol>
     </div>
 </div>
 
