@@ -209,7 +209,7 @@
 
             <span class="meta-info-item article-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="pc" data-updated="Sun Nov 26 2023 13:51:41 GMT+0800">2023-11-26 13:51:41</span>
+                <span class="pc" data-updated="Sun Nov 26 2023 19:17:18 GMT+0800">2023-11-26 19:17:18</span>
             </span>
         
 
@@ -261,10 +261,7 @@
 <p>CAP理论是分布式系统设计中经常被提及的理论，分别对应Consistency（一致性）、Availability（可用性）、Partition tolerance（分区容错性）；在分布式系统中，正常运行时三者均可满足，<strong>当出现分区故障时</strong>三者不能同时满足，最多只能满足其中两个。</p>
 </blockquote>
 <h2 id="1-一致性（Consistency）"><a href="#1-一致性（Consistency）" class="headerlink" title="1. 一致性（Consistency）"></a>1. 一致性（Consistency）</h2><blockquote>
-<p>一致性是指在分布式系统中，数据在多个副本之间是否能够保持一致的特性</p>
-</blockquote>
-<blockquote>
-<p>假设分布式存储系统中有两个节点，经过一次写请求后，两个节点的数据都发生了变化，且后续的读请求均可以在这两个节点上返回相同的数据。那么，这两个节点的数据就被认为是一致的。</p>
+<p>一致性是指在分布式系统中，数据在多个副本之间是否能够保持一致的特性<br>假设分布式存储系统中有两个节点，经过一次写请求后，两个节点的数据都发生了变化，且后续的读请求均可以在这两个节点上返回相同的数据。那么，这两个节点的数据就被认为是一致的。</p>
 </blockquote>
 <p><img  
                      lazyload
@@ -299,8 +296,6 @@
                 ></p>
 <h1 id="CAP选择"><a href="#CAP选择" class="headerlink" title="CAP选择"></a>CAP选择</h1><blockquote>
 <p>在分布式系统中，P是必须的，即使出现分区错误，分布式系统依然需要可用。而根据一致性和可用性选择的不同，分布式系统通常被分为CP系统和AP系统。</p>
-</blockquote>
-<blockquote>
 <ul>
 <li>对CP系统，当出现分区故障时，客户端的任何请求都会卡死或超时，系统的每个节点都会返回一致的数据，典型的系统如Zookeeper</li>
 <li>对AP系统，当出现分区故障时，客户端依然可以访问系统，获取的数据有新有旧，典型的系统如Eureka</li>
