@@ -209,7 +209,7 @@
 
             <span class="meta-info-item article-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="pc" data-updated="Sun Nov 26 2023 15:02:05 GMT+0800">2023-11-26 15:02:05</span>
+                <span class="pc" data-updated="Sun Nov 26 2023 18:59:27 GMT+0800">2023-11-26 18:59:27</span>
             </span>
         
 
@@ -300,6 +300,32 @@
 <h2 id="2-3-Write-Behind-Pattern（写后写模式）"><a href="#2-3-Write-Behind-Pattern（写后写模式）" class="headerlink" title="2.3 Write-Behind Pattern（写后写模式）"></a>2.3 Write-Behind Pattern（写后写模式）</h2><blockquote>
 <p>Write-Behind Pattern与Write-Through Pattern类似，不同的是后者同步更新DB，而前者是异步批量更新DB。使用场景如消息队列异步刷盘、MySQL的InnoDB Buffer Pool机制。由于，较难保证数据一致性，因此常用于对数据一致性要求不高的场景，如播放量、点赞量等。</p>
 </blockquote>
+<h1 id="Cache-Aside-Pattern的一些注意"><a href="#Cache-Aside-Pattern的一些注意" class="headerlink" title="Cache-Aside Pattern的一些注意"></a>Cache-Aside Pattern的一些注意</h1><blockquote>
+<p>旁路模式是平时使用较多的，该模式有几点需要注意</p>
+<ul>
+<li>写操作是需要删除缓存而不是更新缓存；假设请求A发起一个写操作，第一步首先更新DB，请求B再发起一个写操作，紧接着也更新DB，由于网络原因，B比A先更新了缓存，然后A再更新缓存。这时缓存保存的是A的老数据，数据库保存的是B的新数据，因此会出现数据不一致的情况，如果是用删除策略而不是更新策略，则不会出现脏数据问题。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>采用删除缓存策略，会影响缓存的命中率，如果业务对缓存命中率要求较高，也可以采用更新缓存策略。但为了保证数据一致性，可以加一个分布式锁，保证缓存可以有序更新;或者给缓存加入一个较短的过期时间，即使出现不一致的数据也会很快过期。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>写操作时是先写入数据库再删除缓存。假设采用先删除缓存再写入DB策略，请求A发起了一个写操作，先删除了缓存A，此时请求B发起了一个读操作，先读缓存A发现被删除了，然后去读DB，此时A请求还没有更新DB，那么B请求读到的就是旧数据，并且会保存在缓存中，会出现数据不一致的情况。如果采用先删策略，可以采用<strong>延迟双删</strong>策略，即先删除缓存，再删除DB，等待一段时间后再删除一次缓存。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>理论上先更新DB后删除缓存也可能出现数据不一致问题；假设请求A做查询操作，请求B做更新操作，缓存中数据预先刚好失效，请求A先查询DB得到一个旧值，请求B将新值写入DB，请求B删除缓存，请求A将旧值写入缓存，如果按以上顺序执行则会出现脏数据。但这种情况发生概率并不高，因为读DB操作一般远快于写DB操作。为了保险可以<strong>给缓存数据加上过期时间</strong></li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>如果更新完数据库后，删除缓存操作失败，也会出现数据不一致问题，此时的解决方法可以是引入消息队列，将删缓存操作加入队列或者订阅MySQL binlog，再操作缓存。</li>
+</ul>
+</blockquote>
 
                 </div>
 
@@ -379,7 +405,7 @@
             <div class="pc-post-toc right-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Redis%E4%B8%8EMySQL%E7%9A%84%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7%E9%97%AE%E9%A2%98"><span class="nav-text">1. Redis与MySQL的数据一致性问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E7%BC%93%E5%AD%98%E8%AF%BB%E5%86%99%E7%AD%96%E7%95%A5"><span class="nav-text">2. 缓存读写策略</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Cache-Aside-Pattern%EF%BC%88%E6%97%81%E8%B7%AF%E7%BC%93%E5%AD%98%E6%A8%A1%E5%BC%8F%EF%BC%89"><span class="nav-text">2.1 Cache-Aside Pattern（旁路缓存模式）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-Write-Through-Pattern%EF%BC%88%E5%86%99%E7%A9%BF%E9%80%8F%E6%A8%A1%E5%BC%8F%EF%BC%89"><span class="nav-text">2.2 Write-Through Pattern（写穿透模式）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-Write-Behind-Pattern%EF%BC%88%E5%86%99%E5%90%8E%E5%86%99%E6%A8%A1%E5%BC%8F%EF%BC%89"><span class="nav-text">2.3 Write-Behind Pattern（写后写模式）</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Redis%E4%B8%8EMySQL%E7%9A%84%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7%E9%97%AE%E9%A2%98"><span class="nav-text">1. Redis与MySQL的数据一致性问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E7%BC%93%E5%AD%98%E8%AF%BB%E5%86%99%E7%AD%96%E7%95%A5"><span class="nav-text">2. 缓存读写策略</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Cache-Aside-Pattern%EF%BC%88%E6%97%81%E8%B7%AF%E7%BC%93%E5%AD%98%E6%A8%A1%E5%BC%8F%EF%BC%89"><span class="nav-text">2.1 Cache-Aside Pattern（旁路缓存模式）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-Write-Through-Pattern%EF%BC%88%E5%86%99%E7%A9%BF%E9%80%8F%E6%A8%A1%E5%BC%8F%EF%BC%89"><span class="nav-text">2.2 Write-Through Pattern（写穿透模式）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-Write-Behind-Pattern%EF%BC%88%E5%86%99%E5%90%8E%E5%86%99%E6%A8%A1%E5%BC%8F%EF%BC%89"><span class="nav-text">2.3 Write-Behind Pattern（写后写模式）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Cache-Aside-Pattern%E7%9A%84%E4%B8%80%E4%BA%9B%E6%B3%A8%E6%84%8F"><span class="nav-text">Cache-Aside Pattern的一些注意</span></a></li></ol>
     </div>
 </div>
 
@@ -548,7 +574,7 @@
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Redis%E4%B8%8EMySQL%E7%9A%84%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7%E9%97%AE%E9%A2%98"><span class="nav-text">1. Redis与MySQL的数据一致性问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E7%BC%93%E5%AD%98%E8%AF%BB%E5%86%99%E7%AD%96%E7%95%A5"><span class="nav-text">2. 缓存读写策略</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Cache-Aside-Pattern%EF%BC%88%E6%97%81%E8%B7%AF%E7%BC%93%E5%AD%98%E6%A8%A1%E5%BC%8F%EF%BC%89"><span class="nav-text">2.1 Cache-Aside Pattern（旁路缓存模式）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-Write-Through-Pattern%EF%BC%88%E5%86%99%E7%A9%BF%E9%80%8F%E6%A8%A1%E5%BC%8F%EF%BC%89"><span class="nav-text">2.2 Write-Through Pattern（写穿透模式）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-Write-Behind-Pattern%EF%BC%88%E5%86%99%E5%90%8E%E5%86%99%E6%A8%A1%E5%BC%8F%EF%BC%89"><span class="nav-text">2.3 Write-Behind Pattern（写后写模式）</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Redis%E4%B8%8EMySQL%E7%9A%84%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7%E9%97%AE%E9%A2%98"><span class="nav-text">1. Redis与MySQL的数据一致性问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E7%BC%93%E5%AD%98%E8%AF%BB%E5%86%99%E7%AD%96%E7%95%A5"><span class="nav-text">2. 缓存读写策略</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Cache-Aside-Pattern%EF%BC%88%E6%97%81%E8%B7%AF%E7%BC%93%E5%AD%98%E6%A8%A1%E5%BC%8F%EF%BC%89"><span class="nav-text">2.1 Cache-Aside Pattern（旁路缓存模式）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-Write-Through-Pattern%EF%BC%88%E5%86%99%E7%A9%BF%E9%80%8F%E6%A8%A1%E5%BC%8F%EF%BC%89"><span class="nav-text">2.2 Write-Through Pattern（写穿透模式）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-Write-Behind-Pattern%EF%BC%88%E5%86%99%E5%90%8E%E5%86%99%E6%A8%A1%E5%BC%8F%EF%BC%89"><span class="nav-text">2.3 Write-Behind Pattern（写后写模式）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Cache-Aside-Pattern%E7%9A%84%E4%B8%80%E4%BA%9B%E6%B3%A8%E6%84%8F"><span class="nav-text">Cache-Aside Pattern的一些注意</span></a></li></ol>
     </div>
 </div>
 
