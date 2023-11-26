@@ -209,7 +209,7 @@
 
             <span class="meta-info-item article-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="pc" data-updated="Sun Nov 26 2023 12:10:38 GMT+0800">2023-11-26 12:10:38</span>
+                <span class="pc" data-updated="Sun Nov 26 2023 13:51:41 GMT+0800">2023-11-26 13:51:41</span>
             </span>
         
 
@@ -258,7 +258,7 @@
                     
 
                     <h1 id="CAP理论"><a href="#CAP理论" class="headerlink" title="CAP理论"></a>CAP理论</h1><blockquote>
-<p>CAP理论是分布式系统设计中经常被提及的理论，分别对应Consistency（一致性）、Availability（可用性）、Partition tolerance（分区容错性）；在分布式系统中，三者不能同时满足，最多只能满足其中两个。</p>
+<p>CAP理论是分布式系统设计中经常被提及的理论，分别对应Consistency（一致性）、Availability（可用性）、Partition tolerance（分区容错性）；在分布式系统中，正常运行时三者均可满足，<strong>当出现分区故障时</strong>三者不能同时满足，最多只能满足其中两个。</p>
 </blockquote>
 <h2 id="1-一致性（Consistency）"><a href="#1-一致性（Consistency）" class="headerlink" title="1. 一致性（Consistency）"></a>1. 一致性（Consistency）</h2><blockquote>
 <p>一致性是指在分布式系统中，数据在多个副本之间是否能够保持一致的特性</p>
@@ -304,6 +304,14 @@
 <ul>
 <li>对CP系统，当出现分区故障时，客户端的任何请求都会卡死或超时，系统的每个节点都会返回一致的数据，典型的系统如Zookeeper</li>
 <li>对AP系统，当出现分区故障时，客户端依然可以访问系统，获取的数据有新有旧，典型的系统如Eureka</li>
+</ul>
+</blockquote>
+<h1 id="CAP注意点"><a href="#CAP注意点" class="headerlink" title="CAP注意点"></a>CAP注意点</h1><blockquote>
+<ul>
+<li>当没有出现分区问题时，分布式系统应该同时保持一致性和可用性</li>
+<li>C和A是针对分布式系统中的局部模块，而不是整体。比如在支付系统中，订单流水应该保持强一致性，应选择C;会员名称等就不需要强一致性，可以选择A</li>
+<li>CAP本身没有考虑网络延迟问题，它认为一致性是立即生效的，但是要保持一致性实际上是需要时间成本的，因此往往分布式系统多选用AP</li>
+<li>C和A并不是二选一的问题，而是重要性的区别。在强调一致性的同时，并不代表可用性完全被抛弃。比如Zookeeper只是在master出问题的时候才可能出现几十秒的不可用状态，大多是时间都是在强调一致性的同时保证可用性。又或者在其他更强调可用性的系统中，也会采用一些技术手段保证数据的最终一致性</li>
 </ul>
 </blockquote>
 
@@ -369,7 +377,7 @@
             <div class="pc-post-toc right-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CAP%E7%90%86%E8%AE%BA"><span class="nav-text">CAP理论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%B8%80%E8%87%B4%E6%80%A7%EF%BC%88Consistency%EF%BC%89"><span class="nav-text">1. 一致性（Consistency）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%8F%AF%E7%94%A8%E6%80%A7%EF%BC%88Availability%EF%BC%89"><span class="nav-text">2. 可用性（Availability）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%88%86%E5%8C%BA%E5%AE%B9%E5%BF%8D%E6%80%A7%EF%BC%88Partition-tolerance%EF%BC%89"><span class="nav-text">3. 分区容忍性（Partition tolerance）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CAP%E9%80%89%E6%8B%A9"><span class="nav-text">CAP选择</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CAP%E7%90%86%E8%AE%BA"><span class="nav-text">CAP理论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%B8%80%E8%87%B4%E6%80%A7%EF%BC%88Consistency%EF%BC%89"><span class="nav-text">1. 一致性（Consistency）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%8F%AF%E7%94%A8%E6%80%A7%EF%BC%88Availability%EF%BC%89"><span class="nav-text">2. 可用性（Availability）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%88%86%E5%8C%BA%E5%AE%B9%E5%BF%8D%E6%80%A7%EF%BC%88Partition-tolerance%EF%BC%89"><span class="nav-text">3. 分区容忍性（Partition tolerance）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CAP%E9%80%89%E6%8B%A9"><span class="nav-text">CAP选择</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CAP%E6%B3%A8%E6%84%8F%E7%82%B9"><span class="nav-text">CAP注意点</span></a></li></ol>
     </div>
 </div>
 
@@ -538,7 +546,7 @@
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CAP%E7%90%86%E8%AE%BA"><span class="nav-text">CAP理论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%B8%80%E8%87%B4%E6%80%A7%EF%BC%88Consistency%EF%BC%89"><span class="nav-text">1. 一致性（Consistency）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%8F%AF%E7%94%A8%E6%80%A7%EF%BC%88Availability%EF%BC%89"><span class="nav-text">2. 可用性（Availability）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%88%86%E5%8C%BA%E5%AE%B9%E5%BF%8D%E6%80%A7%EF%BC%88Partition-tolerance%EF%BC%89"><span class="nav-text">3. 分区容忍性（Partition tolerance）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CAP%E9%80%89%E6%8B%A9"><span class="nav-text">CAP选择</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CAP%E7%90%86%E8%AE%BA"><span class="nav-text">CAP理论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%B8%80%E8%87%B4%E6%80%A7%EF%BC%88Consistency%EF%BC%89"><span class="nav-text">1. 一致性（Consistency）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%8F%AF%E7%94%A8%E6%80%A7%EF%BC%88Availability%EF%BC%89"><span class="nav-text">2. 可用性（Availability）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%88%86%E5%8C%BA%E5%AE%B9%E5%BF%8D%E6%80%A7%EF%BC%88Partition-tolerance%EF%BC%89"><span class="nav-text">3. 分区容忍性（Partition tolerance）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CAP%E9%80%89%E6%8B%A9"><span class="nav-text">CAP选择</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CAP%E6%B3%A8%E6%84%8F%E7%82%B9"><span class="nav-text">CAP注意点</span></a></li></ol>
     </div>
 </div>
 
