@@ -209,7 +209,7 @@
 
             <span class="meta-info-item article-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="pc" data-updated="Sun Nov 26 2023 18:59:27 GMT+0800">2023-11-26 18:59:27</span>
+                <span class="pc" data-updated="Sun Nov 26 2023 19:11:59 GMT+0800">2023-11-26 19:11:59</span>
             </span>
         
 
@@ -302,30 +302,14 @@
 </blockquote>
 <h1 id="Cache-Aside-Pattern的一些注意"><a href="#Cache-Aside-Pattern的一些注意" class="headerlink" title="Cache-Aside Pattern的一些注意"></a>Cache-Aside Pattern的一些注意</h1><blockquote>
 <p>旁路模式是平时使用较多的，该模式有几点需要注意</p>
+</blockquote>
 <ul>
 <li>写操作是需要删除缓存而不是更新缓存；假设请求A发起一个写操作，第一步首先更新DB，请求B再发起一个写操作，紧接着也更新DB，由于网络原因，B比A先更新了缓存，然后A再更新缓存。这时缓存保存的是A的老数据，数据库保存的是B的新数据，因此会出现数据不一致的情况，如果是用删除策略而不是更新策略，则不会出现脏数据问题。</li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
 <li>采用删除缓存策略，会影响缓存的命中率，如果业务对缓存命中率要求较高，也可以采用更新缓存策略。但为了保证数据一致性，可以加一个分布式锁，保证缓存可以有序更新;或者给缓存加入一个较短的过期时间，即使出现不一致的数据也会很快过期。</li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
 <li>写操作时是先写入数据库再删除缓存。假设采用先删除缓存再写入DB策略，请求A发起了一个写操作，先删除了缓存A，此时请求B发起了一个读操作，先读缓存A发现被删除了，然后去读DB，此时A请求还没有更新DB，那么B请求读到的就是旧数据，并且会保存在缓存中，会出现数据不一致的情况。如果采用先删策略，可以采用<strong>延迟双删</strong>策略，即先删除缓存，再删除DB，等待一段时间后再删除一次缓存。</li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
 <li>理论上先更新DB后删除缓存也可能出现数据不一致问题；假设请求A做查询操作，请求B做更新操作，缓存中数据预先刚好失效，请求A先查询DB得到一个旧值，请求B将新值写入DB，请求B删除缓存，请求A将旧值写入缓存，如果按以上顺序执行则会出现脏数据。但这种情况发生概率并不高，因为读DB操作一般远快于写DB操作。为了保险可以<strong>给缓存数据加上过期时间</strong></li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
 <li>如果更新完数据库后，删除缓存操作失败，也会出现数据不一致问题，此时的解决方法可以是引入消息队列，将删缓存操作加入队列或者订阅MySQL binlog，再操作缓存。</li>
 </ul>
-</blockquote>
 
                 </div>
 
