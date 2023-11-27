@@ -9,7 +9,7 @@
     
     <title>
         
-            CAP理论 |
+            socat |
         
         saberblog
     </title>
@@ -169,9 +169,9 @@
                      style="height: 120px"
                 >
                     <div class="cover-article-title">
-                        CAP理论
+                        socat
                     </div>
-                    <img class="post-cover" src="https://saberblog-1309873493.cos.ap-beijing.myqcloud.com//bg4.png"
+                    <img class="post-cover" src="https://saberblog-1309873493.cos.ap-beijing.myqcloud.com//bg5.png"
                          onerror="this.style.display='none'"
                     >
                 </div>
@@ -203,13 +203,13 @@
         
             <span class="meta-info-item article-create-date">
                 <i class="icon fa-solid fa-calendar-check"></i>&nbsp;
-                <span class="pc">2023-11-26 11:11:45</span>
-                <span class="mobile">2023-11-26 11:11</span>
+                <span class="pc">2023-11-27 21:33:24</span>
+                <span class="mobile">2023-11-27 21:33</span>
             </span>
 
             <span class="meta-info-item article-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="pc" data-updated="Sun Nov 26 2023 19:17:18 GMT+0800">2023-11-26 19:17:18</span>
+                <span class="pc" data-updated="Mon Nov 27 2023 21:53:22 GMT+0800">2023-11-27 21:53:22</span>
             </span>
         
 
@@ -217,7 +217,7 @@
             <span class="meta-info-item article-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
                 <ul class="article-category-ul">
                     
-                            <li class="category-item"><a href="/categories/CAP%E7%90%86%E8%AE%BA/">CAP理论</a></li>
+                            <li class="category-item"><a href="/categories/Linux/">Linux</a></li>
                         
                     
                 </ul>
@@ -229,7 +229,7 @@
                 <i class="icon fas fa-tags"></i>&nbsp;
                 <ul class="article-tag-ul">
                     
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/">分布式系统理论</a></li>
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Linux%E5%91%BD%E4%BB%A4/">Linux命令</a></li>
                         
                     
                 </ul>
@@ -257,59 +257,16 @@
                 <div class="article-content keep-markdown-body">
                     
 
-                    <h1 id="CAP理论"><a href="#CAP理论" class="headerlink" title="CAP理论"></a>CAP理论</h1><blockquote>
-<p>CAP理论是分布式系统设计中经常被提及的理论，分别对应Consistency（一致性）、Availability（可用性）、Partition tolerance（分区容错性）；在分布式系统中，正常运行时三者均可满足，<strong>当出现分区故障时</strong>三者不能同时满足，最多只能满足其中两个。</p>
+                    <blockquote>
+<p>socat [参数] 地址1 地址2<br>socat 将两个地址的数据流连接起来，形成一个双向通道,左边地址的输出传给右边，右边地址的输出传给左边。’-‘代指标准输入输出;’reuseaddr’表示端口复用。</p>
 </blockquote>
-<h2 id="1-一致性（Consistency）"><a href="#1-一致性（Consistency）" class="headerlink" title="1. 一致性（Consistency）"></a>1. 一致性（Consistency）</h2><blockquote>
-<p>一致性是指在分布式系统中，数据在多个副本之间是否能够保持一致的特性<br>假设分布式存储系统中有两个节点，经过一次写请求后，两个节点的数据都发生了变化，且后续的读请求均可以在这两个节点上返回相同的数据。那么，这两个节点的数据就被认为是一致的。</p>
-</blockquote>
-<p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://saberblog-1309873493.cos.ap-beijing.myqcloud.com//%E4%B8%80%E8%87%B4%E6%80%A7%E5%86%99%E5%85%A5%E6%88%90%E5%8A%9F.png"
-                      alt="一致性写入成功" title="一致性写入成功"
-                ></p>
-<blockquote>
-<p>若一致性写入失败，意味着后续读请求可能出现读取到旧数据的情况，为保证对外数据一致性，于是选择不返回任何数据。</p>
-</blockquote>
-<p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://saberblog-1309873493.cos.ap-beijing.myqcloud.com//%E4%B8%80%E8%87%B4%E6%80%A7%E5%86%99%E5%85%A5%E5%A4%B1%E8%B4%A5.png"
-                      alt="一致性写入失败" title="一致性写入失败"
-                ></p>
-<h2 id="2-可用性（Availability）"><a href="#2-可用性（Availability）" class="headerlink" title="2. 可用性（Availability）"></a>2. 可用性（Availability）</h2><blockquote>
-<p>可用性是指在分布式系统中的节点接收到请求后都要能处理并响应结果。需要同时满足以下两点：</p>
-</blockquote>
-<ul>
-<li>返回结果必须在合理的时间以内，如果超过业务定的时间，则认为系统不满足可用性</li>
-<li>系统能正常接收请求的所有节点收到请求后都需要返回结果，如果个别节点宕机，其他节点依然能正常接收处理请求，则认为系统依然可用。如果节点内部存在数据不一致问题，依然需要返回数据，即使返回结果可能不合理。</li>
-</ul>
-<h2 id="3-分区容忍性（Partition-tolerance）"><a href="#3-分区容忍性（Partition-tolerance）" class="headerlink" title="3. 分区容忍性（Partition tolerance）"></a>3. 分区容忍性（Partition tolerance）</h2><blockquote>
-<p>分区容忍性是指分布式系统中，当网络出现分区故障时，分布式系统仍然需要继续运行，即使出现网络分区，也能继续提供服务。</p>
-</blockquote>
-<p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://saberblog-1309873493.cos.ap-beijing.myqcloud.com//%E5%88%86%E5%8C%BA%E5%AE%B9%E5%BF%8D%E6%80%A7.png"
-                      alt="分区容忍性" title="分区容忍性"
-                ></p>
-<h1 id="CAP选择"><a href="#CAP选择" class="headerlink" title="CAP选择"></a>CAP选择</h1><blockquote>
-<p>在分布式系统中，P是必须的，即使出现分区错误，分布式系统依然需要可用。而根据一致性和可用性选择的不同，分布式系统通常被分为CP系统和AP系统。</p>
-<ul>
-<li>对CP系统，当出现分区故障时，客户端的任何请求都会卡死或超时，系统的每个节点都会返回一致的数据，典型的系统如Zookeeper</li>
-<li>对AP系统，当出现分区故障时，客户端依然可以访问系统，获取的数据有新有旧，典型的系统如Eureka</li>
-</ul>
-</blockquote>
-<h1 id="CAP注意点"><a href="#CAP注意点" class="headerlink" title="CAP注意点"></a>CAP注意点</h1><blockquote>
-<ul>
-<li>当没有出现分区问题时，分布式系统应该同时保持一致性和可用性</li>
-<li>C和A是针对分布式系统中的局部模块，而不是整体。比如在支付系统中，订单流水应该保持强一致性，应选择C;会员名称等就不需要强一致性，可以选择A</li>
-<li>CAP本身没有考虑网络延迟问题，它认为一致性是立即生效的，但是要保持一致性实际上是需要时间成本的，因此往往分布式系统多选用AP</li>
-<li>C和A并不是二选一的问题，而是重要性的区别。在强调一致性的同时，并不代表可用性完全被抛弃。比如Zookeeper只是在master出问题的时候才可能出现几十秒的不可用状态，大多是时间都是在强调一致性的同时保证可用性。又或者在其他更强调可用性的系统中，也会采用一些技术手段保证数据的最终一致性</li>
-</ul>
-</blockquote>
+<h1 id="1-测试远程端口的可连接性"><a href="#1-测试远程端口的可连接性" class="headerlink" title="1. 测试远程端口的可连接性"></a>1. 测试远程端口的可连接性</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socat -<span class="built_in">dd</span> - TCP:IPAddress:Port</span><br></pre></td></tr></table></figure>
+<h1 id="2-测试本机端口是否能被外部访问"><a href="#2-测试本机端口是否能被外部访问" class="headerlink" title="2. 测试本机端口是否能被外部访问"></a>2. 测试本机端口是否能被外部访问</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#带参数-u表示单向传输，由左边地址传输给右边地址；若不加参数，则双向传输</span></span><br><span class="line"><span class="comment">#服务端测试端口是否可以被访问</span></span><br><span class="line">socat -u TCP-LISTEN:8001 -</span><br><span class="line"></span><br><span class="line"><span class="comment">#客户端建立对应连接</span></span><br><span class="line">socat -u - TCP:10.27.37.33:8001 </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="3-文件传输"><a href="#3-文件传输" class="headerlink" title="3. 文件传输"></a>3. 文件传输</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#发送方 -u表示数据由左边地址单向传输到右边地址</span></span><br><span class="line">socat -u open:filename tcp-listen:port,reuseaddr</span><br><span class="line"><span class="comment">#接收方</span></span><br><span class="line">socat -u tcp:发送方IP:port open:filename,create</span><br><span class="line">或</span><br><span class="line">socat -u tcp:发送方IP:port - &gt; filename</span><br></pre></td></tr></table></figure>
+<h1 id="4-担当临时web服务器"><a href="#4-担当临时web服务器" class="headerlink" title="4. 担当临时web服务器"></a>4. 担当临时web服务器</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">socat TCP-LISTEN:8080,reuseaddr,fork SYSTEM:<span class="string">&quot;go run web.go&quot;</span></span><br><span class="line"></span><br><span class="line">curl localhost:8080</span><br></pre></td></tr></table></figure>
 
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	resp := <span class="string">&quot;HTTP/1.1 200 OK\n&quot;</span> + <span class="string">&quot;Content-Type: text/plain\n\n&quot;</span> + <span class="string">&quot;hello world&quot;</span></span><br><span class="line">	fmt.Println(resp)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="5-端口转发"><a href="#5-端口转发" class="headerlink" title="5. 端口转发"></a>5. 端口转发</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">socat TCP-LISTEN:8080,fork,reuseaddr  TCP:baidu.com:80</span><br><span class="line">curl -v -H <span class="string">&#x27;Host: baidu.com&#x27;</span> localhost:8080</span><br></pre></td></tr></table></figure>
                 </div>
 
                 
@@ -320,7 +277,7 @@
                             <ul class="post-tags-box border-box">
                                 
                                     <li class="tag-item border-box">
-                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/">分布式系统理论</a>
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/Linux%E5%91%BD%E4%BB%A4/">Linux命令</a>
                                     </li>
                                 
                             </ul>
@@ -336,31 +293,15 @@
                 
                     <div class="article-nav">
                         
-                            <div class="article-prev">
-                                <a class="prev"
-                                   rel="prev"
-                                   href="/2023/11/27/socat/"
-                                   title="socat"
-                                >
-                                    <span class="left arrow-icon flex-center">
-                                      <i class="fas fa-chevron-left"></i>
-                                    </span>
-                                            <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">socat</span>
-                                        <span class="post-nav-item">上一篇</span>
-                                    </span>
-                                </a>
-                            </div>
-                        
                         
                             <div class="article-next">
                                 <a class="next"
                                    rel="next"
-                                   href="/2023/11/26/Redis%E4%B8%8EMySQL%E7%9A%84%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7%E9%97%AE%E9%A2%98/"
-                                   title="Redis与MySQL的数据一致性问题"
+                                   href="/2023/11/26/CAP%E7%90%86%E8%AE%BA/"
+                                   title="CAP理论"
                                 >
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">Redis与MySQL的数据一致性问题</span>
+                                        <span class="post-nav-title-item text-ellipsis">CAP理论</span>
                                         <span class="post-nav-item">下一篇</span>
                                     </span>
                                             <span class="right arrow-icon flex-center">
@@ -388,7 +329,7 @@
             <div class="pc-post-toc right-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CAP%E7%90%86%E8%AE%BA"><span class="nav-text">CAP理论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%B8%80%E8%87%B4%E6%80%A7%EF%BC%88Consistency%EF%BC%89"><span class="nav-text">1. 一致性（Consistency）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%8F%AF%E7%94%A8%E6%80%A7%EF%BC%88Availability%EF%BC%89"><span class="nav-text">2. 可用性（Availability）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%88%86%E5%8C%BA%E5%AE%B9%E5%BF%8D%E6%80%A7%EF%BC%88Partition-tolerance%EF%BC%89"><span class="nav-text">3. 分区容忍性（Partition tolerance）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CAP%E9%80%89%E6%8B%A9"><span class="nav-text">CAP选择</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CAP%E6%B3%A8%E6%84%8F%E7%82%B9"><span class="nav-text">CAP注意点</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E6%B5%8B%E8%AF%95%E8%BF%9C%E7%A8%8B%E7%AB%AF%E5%8F%A3%E7%9A%84%E5%8F%AF%E8%BF%9E%E6%8E%A5%E6%80%A7"><span class="nav-text">1. 测试远程端口的可连接性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E6%B5%8B%E8%AF%95%E6%9C%AC%E6%9C%BA%E7%AB%AF%E5%8F%A3%E6%98%AF%E5%90%A6%E8%83%BD%E8%A2%AB%E5%A4%96%E9%83%A8%E8%AE%BF%E9%97%AE"><span class="nav-text">2. 测试本机端口是否能被外部访问</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93"><span class="nav-text">3. 文件传输</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E6%8B%85%E5%BD%93%E4%B8%B4%E6%97%B6web%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-text">4. 担当临时web服务器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91"><span class="nav-text">5. 端口转发</span></a></li></ol>
     </div>
 </div>
 
@@ -557,7 +498,7 @@
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CAP%E7%90%86%E8%AE%BA"><span class="nav-text">CAP理论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%B8%80%E8%87%B4%E6%80%A7%EF%BC%88Consistency%EF%BC%89"><span class="nav-text">1. 一致性（Consistency）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%8F%AF%E7%94%A8%E6%80%A7%EF%BC%88Availability%EF%BC%89"><span class="nav-text">2. 可用性（Availability）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%88%86%E5%8C%BA%E5%AE%B9%E5%BF%8D%E6%80%A7%EF%BC%88Partition-tolerance%EF%BC%89"><span class="nav-text">3. 分区容忍性（Partition tolerance）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CAP%E9%80%89%E6%8B%A9"><span class="nav-text">CAP选择</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CAP%E6%B3%A8%E6%84%8F%E7%82%B9"><span class="nav-text">CAP注意点</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E6%B5%8B%E8%AF%95%E8%BF%9C%E7%A8%8B%E7%AB%AF%E5%8F%A3%E7%9A%84%E5%8F%AF%E8%BF%9E%E6%8E%A5%E6%80%A7"><span class="nav-text">1. 测试远程端口的可连接性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E6%B5%8B%E8%AF%95%E6%9C%AC%E6%9C%BA%E7%AB%AF%E5%8F%A3%E6%98%AF%E5%90%A6%E8%83%BD%E8%A2%AB%E5%A4%96%E9%83%A8%E8%AE%BF%E9%97%AE"><span class="nav-text">2. 测试本机端口是否能被外部访问</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93"><span class="nav-text">3. 文件传输</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E6%8B%85%E5%BD%93%E4%B8%B4%E6%97%B6web%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-text">4. 担当临时web服务器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91"><span class="nav-text">5. 端口转发</span></a></li></ol>
     </div>
 </div>
 
