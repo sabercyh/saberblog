@@ -209,7 +209,7 @@
 
             <span class="meta-info-item article-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="pc" data-updated="Mon Nov 27 2023 21:53:22 GMT+0800">2023-11-27 21:53:22</span>
+                <span class="pc" data-updated="Mon Nov 27 2023 22:00:03 GMT+0800">2023-11-27 22:00:03</span>
             </span>
         
 
@@ -258,7 +258,7 @@
                     
 
                     <blockquote>
-<p>socat [参数] 地址1 地址2<br>socat 将两个地址的数据流连接起来，形成一个双向通道,左边地址的输出传给右边，右边地址的输出传给左边。’-‘代指标准输入输出;’reuseaddr’表示端口复用。</p>
+<p>socat [参数] 地址1 地址2<br>socat 将两个地址的数据流连接起来，形成一个双向通道,左边地址的输出传给右边，右边地址的输出传给左边。’-‘代指标准输入输出;’reuseaddr’表示端口复用，防止出现连接断开无法监听的情况;’fork’表示每建立一个连接就fork一个进程。</p>
 </blockquote>
 <h1 id="1-测试远程端口的可连接性"><a href="#1-测试远程端口的可连接性" class="headerlink" title="1. 测试远程端口的可连接性"></a>1. 测试远程端口的可连接性</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socat -<span class="built_in">dd</span> - TCP:IPAddress:Port</span><br></pre></td></tr></table></figure>
 <h1 id="2-测试本机端口是否能被外部访问"><a href="#2-测试本机端口是否能被外部访问" class="headerlink" title="2. 测试本机端口是否能被外部访问"></a>2. 测试本机端口是否能被外部访问</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#带参数-u表示单向传输，由左边地址传输给右边地址；若不加参数，则双向传输</span></span><br><span class="line"><span class="comment">#服务端测试端口是否可以被访问</span></span><br><span class="line">socat -u TCP-LISTEN:8001 -</span><br><span class="line"></span><br><span class="line"><span class="comment">#客户端建立对应连接</span></span><br><span class="line">socat -u - TCP:10.27.37.33:8001 </span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -266,7 +266,7 @@
 <h1 id="4-担当临时web服务器"><a href="#4-担当临时web服务器" class="headerlink" title="4. 担当临时web服务器"></a>4. 担当临时web服务器</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">socat TCP-LISTEN:8080,reuseaddr,fork SYSTEM:<span class="string">&quot;go run web.go&quot;</span></span><br><span class="line"></span><br><span class="line">curl localhost:8080</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	resp := <span class="string">&quot;HTTP/1.1 200 OK\n&quot;</span> + <span class="string">&quot;Content-Type: text/plain\n\n&quot;</span> + <span class="string">&quot;hello world&quot;</span></span><br><span class="line">	fmt.Println(resp)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="5-端口转发"><a href="#5-端口转发" class="headerlink" title="5. 端口转发"></a>5. 端口转发</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">socat TCP-LISTEN:8080,fork,reuseaddr  TCP:baidu.com:80</span><br><span class="line">curl -v -H <span class="string">&#x27;Host: baidu.com&#x27;</span> localhost:8080</span><br></pre></td></tr></table></figure>
+<h1 id="5-端口转发"><a href="#5-端口转发" class="headerlink" title="5. 端口转发"></a>5. 端口转发</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">socat TCP-LISTEN:8080,fork,reuseaddr TCP:baidu.com:80</span><br><span class="line">curl -v -H <span class="string">&#x27;Host: baidu.com&#x27;</span> localhost:8080</span><br></pre></td></tr></table></figure>
                 </div>
 
                 
