@@ -9,7 +9,7 @@
     
     <title>
         
-            socat |
+            slice |
         
         saberblog
     </title>
@@ -169,9 +169,9 @@
                      style="height: 120px"
                 >
                     <div class="cover-article-title">
-                        socat
+                        slice
                     </div>
-                    <img class="post-cover" src="https://saberblog-1309873493.cos.ap-beijing.myqcloud.com//bg5.png"
+                    <img class="post-cover" src="https://saberblog-1309873493.cos.ap-beijing.myqcloud.com//bg7.png"
                          onerror="this.style.display='none'"
                     >
                 </div>
@@ -203,13 +203,13 @@
         
             <span class="meta-info-item article-create-date">
                 <i class="icon fa-solid fa-calendar-check"></i>&nbsp;
-                <span class="pc">2023-11-27 21:33:24</span>
-                <span class="mobile">2023-11-27 21:33</span>
+                <span class="pc">2023-12-04 22:10:17</span>
+                <span class="mobile">2023-12-04 22:10</span>
             </span>
 
             <span class="meta-info-item article-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="pc" data-updated="Mon Nov 27 2023 22:51:20 GMT+0800">2023-11-27 22:51:20</span>
+                <span class="pc" data-updated="Mon Dec 04 2023 22:10:48 GMT+0800">2023-12-04 22:10:48</span>
             </span>
         
 
@@ -217,7 +217,7 @@
             <span class="meta-info-item article-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
                 <ul class="article-category-ul">
                     
-                            <li class="category-item"><a href="/categories/Linux/">Linux</a></li>
+                            <li class="category-item"><a href="/categories/Go/">Go</a></li>
                         
                     
                 </ul>
@@ -229,7 +229,7 @@
                 <i class="icon fas fa-tags"></i>&nbsp;
                 <ul class="article-tag-ul">
                     
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Linux%E5%91%BD%E4%BB%A4/">Linux命令</a></li>
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Go/">Go</a></li>
                         
                     
                 </ul>
@@ -257,16 +257,31 @@
                 <div class="article-content keep-markdown-body">
                     
 
-                    <blockquote>
-<p>socat [参数] 地址1 地址2<br>socat 将两个地址的数据流连接起来，形成一个双向通道,左边地址的输出传给右边，右边地址的输出传给左边。’-‘代指标准输入输出;’reuseaddr’表示端口复用，防止出现连接断开无法监听的情况;’fork’表示每建立一个连接就fork一个进程。</p>
-</blockquote>
-<h1 id="1-测试远程端口的可连接性"><a href="#1-测试远程端口的可连接性" class="headerlink" title="1. 测试远程端口的可连接性"></a>1. 测试远程端口的可连接性</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socat -<span class="built_in">dd</span> - TCP:IPAddress:Port</span><br></pre></td></tr></table></figure>
-<h1 id="2-测试本机端口是否能被外部访问"><a href="#2-测试本机端口是否能被外部访问" class="headerlink" title="2. 测试本机端口是否能被外部访问"></a>2. 测试本机端口是否能被外部访问</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#带参数-u表示单向传输，由左边地址传输给右边地址；若不加参数，则双向传输</span></span><br><span class="line"><span class="comment">#服务端测试端口是否可以被访问</span></span><br><span class="line">socat -u TCP-LISTEN:8001 -</span><br><span class="line"></span><br><span class="line"><span class="comment">#客户端建立对应连接</span></span><br><span class="line">socat -u - TCP:10.27.37.33:8001 </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h1 id="3-文件传输"><a href="#3-文件传输" class="headerlink" title="3. 文件传输"></a>3. 文件传输</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#发送方 -u表示数据由左边地址单向传输到右边地址</span></span><br><span class="line">socat -u open:filename tcp-listen:port,reuseaddr</span><br><span class="line"><span class="comment">#接收方</span></span><br><span class="line">socat -u tcp:发送方IP:port open:filename,create</span><br><span class="line">或</span><br><span class="line">socat -u tcp:发送方IP:port - &gt; filename</span><br></pre></td></tr></table></figure>
-<h1 id="4-担当临时web服务器"><a href="#4-担当临时web服务器" class="headerlink" title="4. 担当临时web服务器"></a>4. 担当临时web服务器</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">socat TCP-LISTEN:8080,reuseaddr,fork SYSTEM:<span class="string">&quot;go run web.go&quot;</span></span><br><span class="line"></span><br><span class="line">curl localhost:8080</span><br></pre></td></tr></table></figure>
+                    <h1 id="1-slice结构体"><a href="#1-slice结构体" class="headerlink" title="1. slice结构体"></a>1. slice结构体</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> SliceHeader <span class="keyword">struct</span> &#123;</span><br><span class="line">	Data <span class="type">uintptr</span></span><br><span class="line">	Len  <span class="type">int</span></span><br><span class="line">	Cap  <span class="type">int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	resp := <span class="string">&quot;HTTP/1.1 200 OK\n&quot;</span> + <span class="string">&quot;Content-Type: text/plain\n\n&quot;</span> + <span class="string">&quot;hello world&quot;</span></span><br><span class="line">	fmt.Println(resp)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="5-端口转发"><a href="#5-端口转发" class="headerlink" title="5. 端口转发"></a>5. 端口转发</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">socat TCP-LISTEN:8080,fork,reuseaddr TCP:baidu.com:80</span><br><span class="line">curl -v -H <span class="string">&#x27;Host: baidu.com&#x27;</span> localhost:8080</span><br></pre></td></tr></table></figure>
+<h1 id="2-slice初始化"><a href="#2-slice初始化" class="headerlink" title="2. slice初始化"></a>2. slice初始化</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">makeslice</span><span class="params">(et *_type, <span class="built_in">len</span>, <span class="built_in">cap</span> <span class="type">int</span>)</span></span> unsafe.Pointer &#123;</span><br><span class="line">	mem, overflow := math.MulUintptr(et.size, <span class="type">uintptr</span>(<span class="built_in">cap</span>))</span><br><span class="line">	<span class="keyword">if</span> overflow || mem &gt; maxAlloc || <span class="built_in">len</span> &lt; <span class="number">0</span> || <span class="built_in">len</span> &gt; <span class="built_in">cap</span> &#123;</span><br><span class="line">		mem, overflow := math.MulUintptr(et.size, <span class="type">uintptr</span>(<span class="built_in">len</span>))</span><br><span class="line">		<span class="keyword">if</span> overflow || mem &gt; maxAlloc || <span class="built_in">len</span> &lt; <span class="number">0</span> &#123;</span><br><span class="line">			panicmakeslicelen()</span><br><span class="line">		&#125;</span><br><span class="line">		panicmakeslicecap()</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> mallocgc(mem, et, <span class="literal">true</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>初始化时需要校验</p>
+</blockquote>
+<ul>
+<li>是否出现内存溢出</li>
+<li>是否超过最大可分配内存容量</li>
+<li>len是否大于0且小于cap<br>makeslice返回指向底层数组指针，由其调用方组装成对应结构体</li>
+</ul>
+<h1 id="3-slice扩容"><a href="#3-slice扩容" class="headerlink" title="3. slice扩容"></a>3. slice扩容</h1><blockquote>
+<p>根据是否需要覆盖原变量，选择以下两种扩容策略</p>
+</blockquote>
+<h2 id="3-1-覆盖原变量"><a href="#3-1-覆盖原变量" class="headerlink" title="3.1 覆盖原变量"></a>3.1 覆盖原变量</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// slice = append(slice, 1, 2, 3)</span></span><br><span class="line">a := &amp;slice</span><br><span class="line">ptr, <span class="built_in">len</span>, <span class="built_in">cap</span> := slice</span><br><span class="line">newlen := <span class="built_in">len</span> + <span class="number">3</span></span><br><span class="line"><span class="keyword">if</span> <span class="type">uint</span>(newlen) &gt; <span class="type">uint</span>(<span class="built_in">cap</span>) &#123;</span><br><span class="line">   newptr, <span class="built_in">len</span>, newcap = growslice(slice, newlen)</span><br><span class="line">   vardef(a)</span><br><span class="line">   *a.<span class="built_in">cap</span> = newcap</span><br><span class="line">   *a.ptr = newptr</span><br><span class="line">&#125;</span><br><span class="line">newlen = <span class="built_in">len</span> + <span class="number">3</span></span><br><span class="line">*a.<span class="built_in">len</span> = newlen</span><br><span class="line">*(ptr+<span class="built_in">len</span>) = <span class="number">1</span></span><br><span class="line">*(ptr+<span class="built_in">len</span>+<span class="number">1</span>) = <span class="number">2</span></span><br><span class="line">*(ptr+<span class="built_in">len</span>+<span class="number">2</span>) = <span class="number">3</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-2-追加新变量"><a href="#3-2-追加新变量" class="headerlink" title="3.2 追加新变量"></a>3.2 追加新变量</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// append(slice, 1, 2, 3)</span></span><br><span class="line">ptr, <span class="built_in">len</span>, <span class="built_in">cap</span> := slice</span><br><span class="line">newlen := <span class="built_in">len</span> + <span class="number">3</span></span><br><span class="line"><span class="keyword">if</span> newlen &gt; <span class="built_in">cap</span> &#123;</span><br><span class="line">    ptr, <span class="built_in">len</span>, <span class="built_in">cap</span> = growslice(slice, newlen)</span><br><span class="line">    newlen = <span class="built_in">len</span> + <span class="number">3</span></span><br><span class="line">&#125;</span><br><span class="line">*(ptr+<span class="built_in">len</span>) = <span class="number">1</span></span><br><span class="line">*(ptr+<span class="built_in">len</span>+<span class="number">1</span>) = <span class="number">2</span></span><br><span class="line">*(ptr+<span class="built_in">len</span>+<span class="number">2</span>) = <span class="number">3</span></span><br><span class="line"><span class="keyword">return</span> makeslice(ptr, newlen, <span class="built_in">cap</span>)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>覆盖策略与不覆盖策略的执行逻辑类似，区别在于需要将原先切片中的数据拷贝到新切片，并更新len和cap</p>
+</blockquote>
+<h1 id="4-扩容策略"><a href="#4-扩容策略" class="headerlink" title="4. 扩容策略"></a>4. 扩容策略</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">growslice</span><span class="params">(et *_type, old slice, <span class="built_in">cap</span> <span class="type">int</span>)</span></span> slice &#123;</span><br><span class="line">	newcap := old.<span class="built_in">cap</span></span><br><span class="line">	doublecap := newcap + newcap</span><br><span class="line">	<span class="keyword">if</span> <span class="built_in">cap</span> &gt; doublecap &#123;</span><br><span class="line">		newcap = <span class="built_in">cap</span></span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> old.<span class="built_in">len</span> &lt; <span class="number">1024</span> &#123;</span><br><span class="line">			newcap = doublecap</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">for</span> <span class="number">0</span> &lt; newcap &amp;&amp; newcap &lt; <span class="built_in">cap</span> &#123;</span><br><span class="line">				newcap += newcap / <span class="number">4</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> newcap &lt;= <span class="number">0</span> &#123;</span><br><span class="line">				newcap = <span class="built_in">cap</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>上述代码片段仅会确定切片的大致容量，还需要根据切片中的元素大小对齐内存,将待申请的内存向上取整，取整时会使用 <a class="link"   target="_blank" rel="noopener" href="https://draveness.me/golang/tree/runtime.class_to_size" >runtime.class_to_size<i class="fas fa-external-link-alt"></i></a> 数组</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> class_to_size = [_NumSizeClasses]<span class="type">uint16</span>&#123;<span class="number">0</span>, <span class="number">8</span>, <span class="number">16</span>, <span class="number">24</span>, <span class="number">32</span>, <span class="number">48</span>, <span class="number">64</span>, <span class="number">80</span>, <span class="number">96</span>, <span class="number">112</span>, <span class="number">128</span>, <span class="number">144</span>, <span class="number">160</span>, <span class="number">176</span>, <span class="number">192</span>, <span class="number">208</span>, <span class="number">224</span>, <span class="number">240</span>, <span class="number">256</span>, <span class="number">288</span>, <span class="number">320</span>, <span class="number">352</span>, <span class="number">384</span>, <span class="number">416</span>, <span class="number">448</span>, <span class="number">480</span>, <span class="number">512</span>, <span class="number">576</span>, <span class="number">640</span>, <span class="number">704</span>, <span class="number">768</span>, <span class="number">896</span>, <span class="number">1024</span>, <span class="number">1152</span>, <span class="number">1280</span>, <span class="number">1408</span>, <span class="number">1536</span>, <span class="number">1792</span>, <span class="number">2048</span>, <span class="number">2304</span>, <span class="number">2688</span>, <span class="number">3072</span>, <span class="number">3200</span>, <span class="number">3456</span>, <span class="number">4096</span>, <span class="number">4864</span>, <span class="number">5376</span>, <span class="number">6144</span>, <span class="number">6528</span>, <span class="number">6784</span>, <span class="number">6912</span>, <span class="number">8192</span>, <span class="number">9472</span>, <span class="number">9728</span>, <span class="number">10240</span>, <span class="number">10880</span>, <span class="number">12288</span>, <span class="number">13568</span>, <span class="number">14336</span>, <span class="number">16384</span>, <span class="number">18432</span>, <span class="number">19072</span>, <span class="number">20480</span>, <span class="number">21760</span>, <span class="number">24576</span>, <span class="number">27264</span>, <span class="number">28672</span>, <span class="number">32768</span>&#125;</span><br></pre></td></tr></table></figure>
+
                 </div>
 
                 
@@ -277,7 +292,7 @@
                             <ul class="post-tags-box border-box">
                                 
                                     <li class="tag-item border-box">
-                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/Linux%E5%91%BD%E4%BB%A4/">Linux命令</a>
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/Go/">Go</a>
                                     </li>
                                 
                             </ul>
@@ -293,31 +308,15 @@
                 
                     <div class="article-nav">
                         
-                            <div class="article-prev">
-                                <a class="prev"
-                                   rel="prev"
-                                   href="/2023/12/04/%E6%8C%87%E9%92%88/"
-                                   title="指针"
-                                >
-                                    <span class="left arrow-icon flex-center">
-                                      <i class="fas fa-chevron-left"></i>
-                                    </span>
-                                            <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">指针</span>
-                                        <span class="post-nav-item">上一篇</span>
-                                    </span>
-                                </a>
-                            </div>
-                        
                         
                             <div class="article-next">
                                 <a class="next"
                                    rel="next"
-                                   href="/2023/11/26/CAP%E7%90%86%E8%AE%BA/"
-                                   title="CAP理论"
+                                   href="/2023/12/04/%E6%8C%87%E9%92%88/"
+                                   title="指针"
                                 >
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">CAP理论</span>
+                                        <span class="post-nav-title-item text-ellipsis">指针</span>
                                         <span class="post-nav-item">下一篇</span>
                                     </span>
                                             <span class="right arrow-icon flex-center">
@@ -345,7 +344,7 @@
             <div class="pc-post-toc right-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E6%B5%8B%E8%AF%95%E8%BF%9C%E7%A8%8B%E7%AB%AF%E5%8F%A3%E7%9A%84%E5%8F%AF%E8%BF%9E%E6%8E%A5%E6%80%A7"><span class="nav-text">1. 测试远程端口的可连接性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E6%B5%8B%E8%AF%95%E6%9C%AC%E6%9C%BA%E7%AB%AF%E5%8F%A3%E6%98%AF%E5%90%A6%E8%83%BD%E8%A2%AB%E5%A4%96%E9%83%A8%E8%AE%BF%E9%97%AE"><span class="nav-text">2. 测试本机端口是否能被外部访问</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93"><span class="nav-text">3. 文件传输</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E6%8B%85%E5%BD%93%E4%B8%B4%E6%97%B6web%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-text">4. 担当临时web服务器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91"><span class="nav-text">5. 端口转发</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-slice%E7%BB%93%E6%9E%84%E4%BD%93"><span class="nav-text">1. slice结构体</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-slice%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-text">2. slice初始化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-slice%E6%89%A9%E5%AE%B9"><span class="nav-text">3. slice扩容</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E8%A6%86%E7%9B%96%E5%8E%9F%E5%8F%98%E9%87%8F"><span class="nav-text">3.1 覆盖原变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E8%BF%BD%E5%8A%A0%E6%96%B0%E5%8F%98%E9%87%8F"><span class="nav-text">3.2 追加新变量</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E6%89%A9%E5%AE%B9%E7%AD%96%E7%95%A5"><span class="nav-text">4. 扩容策略</span></a></li></ol>
     </div>
 </div>
 
@@ -514,7 +513,7 @@
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E6%B5%8B%E8%AF%95%E8%BF%9C%E7%A8%8B%E7%AB%AF%E5%8F%A3%E7%9A%84%E5%8F%AF%E8%BF%9E%E6%8E%A5%E6%80%A7"><span class="nav-text">1. 测试远程端口的可连接性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E6%B5%8B%E8%AF%95%E6%9C%AC%E6%9C%BA%E7%AB%AF%E5%8F%A3%E6%98%AF%E5%90%A6%E8%83%BD%E8%A2%AB%E5%A4%96%E9%83%A8%E8%AE%BF%E9%97%AE"><span class="nav-text">2. 测试本机端口是否能被外部访问</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93"><span class="nav-text">3. 文件传输</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E6%8B%85%E5%BD%93%E4%B8%B4%E6%97%B6web%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-text">4. 担当临时web服务器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91"><span class="nav-text">5. 端口转发</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-slice%E7%BB%93%E6%9E%84%E4%BD%93"><span class="nav-text">1. slice结构体</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-slice%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-text">2. slice初始化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-slice%E6%89%A9%E5%AE%B9"><span class="nav-text">3. slice扩容</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E8%A6%86%E7%9B%96%E5%8E%9F%E5%8F%98%E9%87%8F"><span class="nav-text">3.1 覆盖原变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E8%BF%BD%E5%8A%A0%E6%96%B0%E5%8F%98%E9%87%8F"><span class="nav-text">3.2 追加新变量</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E6%89%A9%E5%AE%B9%E7%AD%96%E7%95%A5"><span class="nav-text">4. 扩容策略</span></a></li></ol>
     </div>
 </div>
 
