@@ -9,7 +9,7 @@
     
     <title>
         
-            slice |
+            Slice |
         
         saberblog
     </title>
@@ -169,7 +169,7 @@
                      style="height: 120px"
                 >
                     <div class="cover-article-title">
-                        slice
+                        Slice
                     </div>
                     <img class="post-cover" src="https://saberblog-1309873493.cos.ap-beijing.myqcloud.com//bg7.png"
                          onerror="this.style.display='none'"
@@ -209,7 +209,7 @@
 
             <span class="meta-info-item article-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="pc" data-updated="Mon Dec 04 2023 22:10:48 GMT+0800">2023-12-04 22:10:48</span>
+                <span class="pc" data-updated="Mon Dec 04 2023 22:21:30 GMT+0800">2023-12-04 22:21:30</span>
             </span>
         
 
@@ -259,15 +259,8 @@
 
                     <h1 id="1-slice结构体"><a href="#1-slice结构体" class="headerlink" title="1. slice结构体"></a>1. slice结构体</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> SliceHeader <span class="keyword">struct</span> &#123;</span><br><span class="line">	Data <span class="type">uintptr</span></span><br><span class="line">	Len  <span class="type">int</span></span><br><span class="line">	Cap  <span class="type">int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h1 id="2-slice初始化"><a href="#2-slice初始化" class="headerlink" title="2. slice初始化"></a>2. slice初始化</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">makeslice</span><span class="params">(et *_type, <span class="built_in">len</span>, <span class="built_in">cap</span> <span class="type">int</span>)</span></span> unsafe.Pointer &#123;</span><br><span class="line">	mem, overflow := math.MulUintptr(et.size, <span class="type">uintptr</span>(<span class="built_in">cap</span>))</span><br><span class="line">	<span class="keyword">if</span> overflow || mem &gt; maxAlloc || <span class="built_in">len</span> &lt; <span class="number">0</span> || <span class="built_in">len</span> &gt; <span class="built_in">cap</span> &#123;</span><br><span class="line">		mem, overflow := math.MulUintptr(et.size, <span class="type">uintptr</span>(<span class="built_in">len</span>))</span><br><span class="line">		<span class="keyword">if</span> overflow || mem &gt; maxAlloc || <span class="built_in">len</span> &lt; <span class="number">0</span> &#123;</span><br><span class="line">			panicmakeslicelen()</span><br><span class="line">		&#125;</span><br><span class="line">		panicmakeslicecap()</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> mallocgc(mem, et, <span class="literal">true</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>初始化时需要校验</p>
-</blockquote>
-<ul>
-<li>是否出现内存溢出</li>
-<li>是否超过最大可分配内存容量</li>
-<li>len是否大于0且小于cap<br>makeslice返回指向底层数组指针，由其调用方组装成对应结构体</li>
-</ul>
+<h1 id="2-slice初始化"><a href="#2-slice初始化" class="headerlink" title="2. slice初始化"></a>2. slice初始化</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">makeslice</span><span class="params">(et *_type, <span class="built_in">len</span>, <span class="built_in">cap</span> <span class="type">int</span>)</span></span> unsafe.Pointer &#123;</span><br><span class="line">	mem, overflow := math.MulUintptr(et.size, <span class="type">uintptr</span>(<span class="built_in">cap</span>))</span><br><span class="line">    <span class="comment">//校验内存是否溢出、是否超过最大可分配内存容量、len是否大于0且小于cap</span></span><br><span class="line">	<span class="keyword">if</span> overflow || mem &gt; maxAlloc || <span class="built_in">len</span> &lt; <span class="number">0</span> || <span class="built_in">len</span> &gt; <span class="built_in">cap</span> &#123;</span><br><span class="line">		mem, overflow := math.MulUintptr(et.size, <span class="type">uintptr</span>(<span class="built_in">len</span>))</span><br><span class="line">		<span class="keyword">if</span> overflow || mem &gt; maxAlloc || <span class="built_in">len</span> &lt; <span class="number">0</span> &#123;</span><br><span class="line">			panicmakeslicelen()</span><br><span class="line">		&#125;</span><br><span class="line">		panicmakeslicecap()</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="comment">//makeslice返回指向底层数组指针，由其调用方组装成对应结构体</span></span><br><span class="line">	<span class="keyword">return</span> mallocgc(mem, et, <span class="literal">true</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h1 id="3-slice扩容"><a href="#3-slice扩容" class="headerlink" title="3. slice扩容"></a>3. slice扩容</h1><blockquote>
 <p>根据是否需要覆盖原变量，选择以下两种扩容策略</p>
 </blockquote>
@@ -276,7 +269,7 @@
 <blockquote>
 <p>覆盖策略与不覆盖策略的执行逻辑类似，区别在于需要将原先切片中的数据拷贝到新切片，并更新len和cap</p>
 </blockquote>
-<h1 id="4-扩容策略"><a href="#4-扩容策略" class="headerlink" title="4. 扩容策略"></a>4. 扩容策略</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">growslice</span><span class="params">(et *_type, old slice, <span class="built_in">cap</span> <span class="type">int</span>)</span></span> slice &#123;</span><br><span class="line">	newcap := old.<span class="built_in">cap</span></span><br><span class="line">	doublecap := newcap + newcap</span><br><span class="line">	<span class="keyword">if</span> <span class="built_in">cap</span> &gt; doublecap &#123;</span><br><span class="line">		newcap = <span class="built_in">cap</span></span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> old.<span class="built_in">len</span> &lt; <span class="number">1024</span> &#123;</span><br><span class="line">			newcap = doublecap</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">for</span> <span class="number">0</span> &lt; newcap &amp;&amp; newcap &lt; <span class="built_in">cap</span> &#123;</span><br><span class="line">				newcap += newcap / <span class="number">4</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> newcap &lt;= <span class="number">0</span> &#123;</span><br><span class="line">				newcap = <span class="built_in">cap</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="4-扩容策略"><a href="#4-扩容策略" class="headerlink" title="4. 扩容策略"></a>4. 扩容策略</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">growslice</span><span class="params">(et *_type, old slice, <span class="built_in">cap</span> <span class="type">int</span>)</span></span> slice &#123;</span><br><span class="line">	newcap := old.<span class="built_in">cap</span></span><br><span class="line">	doublecap := newcap + newcap</span><br><span class="line">    <span class="comment">//如果新容量大于原容量的两倍，则直接使用新容量</span></span><br><span class="line">	<span class="keyword">if</span> <span class="built_in">cap</span> &gt; doublecap &#123;</span><br><span class="line">		newcap = <span class="built_in">cap</span></span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">//原长度小于1024则双倍扩容</span></span><br><span class="line">		<span class="keyword">if</span> old.<span class="built_in">len</span> &lt; <span class="number">1024</span> &#123;</span><br><span class="line">			newcap = doublecap</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//原长度大于1024，则根据每次增加原长度的四分之一，知道大于新容量为止</span></span><br><span class="line">			<span class="keyword">for</span> <span class="number">0</span> &lt; newcap &amp;&amp; newcap &lt; <span class="built_in">cap</span> &#123;</span><br><span class="line">				newcap += newcap / <span class="number">4</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> newcap &lt;= <span class="number">0</span> &#123;</span><br><span class="line">				newcap = <span class="built_in">cap</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>上述代码片段仅会确定切片的大致容量，还需要根据切片中的元素大小对齐内存,将待申请的内存向上取整，取整时会使用 <a class="link"   target="_blank" rel="noopener" href="https://draveness.me/golang/tree/runtime.class_to_size" >runtime.class_to_size<i class="fas fa-external-link-alt"></i></a> 数组</p>
 </blockquote>
@@ -307,6 +300,22 @@
 
                 
                     <div class="article-nav">
+                        
+                            <div class="article-prev">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2023/12/04/Map/"
+                                   title="Map"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                      <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                            <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">Map</span>
+                                        <span class="post-nav-item">上一篇</span>
+                                    </span>
+                                </a>
+                            </div>
                         
                         
                             <div class="article-next">
