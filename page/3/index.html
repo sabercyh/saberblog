@@ -9,8 +9,6 @@
     
     <title>
         
-            标签: 系统设计 |
-        
         saberblog
     </title>
     
@@ -62,10 +60,10 @@
     
 
     <!-- page content -->
-    <div class="page-main-content border-box">
+    <div class="page-main-content border-box is-home">
         <div class="page-main-content-top">
             
-<header class="header-wrapper">
+<header class="header-wrapper transparent-1">
 
     <div class="border-box header-content">
         <div class="left border-box">
@@ -84,7 +82,7 @@
                 <ul class="menu-list">
                     
                         <li class="menu-item">
-                            <a class=""
+                            <a class="active"
                                href="/"
                             >
                                 首页
@@ -129,7 +127,7 @@
         <ul class="drawer-menu-list">
             
                 <li class="drawer-menu-item flex-center">
-                    <a class=""
+                    <a class="active"
                        href="/">首页</a>
                 </li>
             
@@ -159,42 +157,113 @@
 
                 
 
-                    <div class="fade-in-down-animation">
-    <div class="tag-container border-box">
-        <div class="tag-name"><i class="fas fa-hashtag"></i>&nbsp;系统设计
-        </div>
-        <div class="tag-post-list">
-            
-<div class="archive-list-container border-box">
+                    <div class="home-content-container fade-in-down-animation">
+    <ul class="home-article-list border-box">
+        
+            <li class="home-article-item">
+
+                
+                    <div class="home-article-item-top border-box"
+                         style="height: 120px"
+                    >
+                        
+                        <img class="home-cover" src="https://saberblog-1309873493.cos.ap-beijing.myqcloud.com//bg1.png"
+                             onerror="this.style.display='none'"
+                        >
+                    </div>
+                
+
+                <div class="home-article-item-bottom border-box">
+                    
+                    <h3 class="home-article-title border-box">
+                        <a href="/2023/10/20/markdown/">
+                            Markdown
+                        </a>
+                    </h3>
+
+                    <div class="home-article-content keep-markdown-body">
+                        
+                            Markdown基本语法
+                        
+                    </div>
+
+                    
+
+<div class="article-meta-info-container border-box home">
+    <div class="article-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-article-history" data-updated="Mon Dec 04 2023 22:13:48 GMT+0800">2023-12-04 22:13:48</span>
+            </span>
+        
+
+
+        
+
+        
+            <span class="meta-info-item article-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="article-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/Markdown/">Markdown</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="article-tag meta-info-item border-box">
+                <i class="icon fas fa-tags"></i>&nbsp;
+                <ul class="article-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Markdown/">Markdown</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+    </div>
+
     
-        <section class="archive-item border-box">
-            <div class="archive-item-header border-box">
-                <span class="archive-year">2024</span>
-            </div>
-            <ul class="article-list border-box">
-                
-                    <li class="article-item border-box">
-                        <span class="article-date border-box">02-22</span>
-                        <a class="article-title border-box text-ellipsis"
-                           href="/2024/02/22/Feed%E6%B5%81%E7%B3%BB%E7%BB%9F/"
-                        >Feed流系统</a>
-                    </li>
-                
-                    <li class="article-item border-box">
-                        <span class="article-date border-box">02-22</span>
-                        <a class="article-title border-box text-ellipsis"
-                           href="/2024/02/22/%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F/"
-                        >秒杀系统</a>
-                    </li>
-                
-            </ul>
-        </section>
+        <a class="home-read-more" href="/2023/10/20/markdown/">阅读全文&nbsp;<i class="icon fas fa-angles-right"></i></a>
     
 </div>
 
+                </div>
+            </li>
+        
+    </ul>
+    
+    <div class="paginator border-box flex-center">
+        <div class="btn-wrap allowed">
+            <a class="jump-btn"
+               href="/page/2/"
+            ><i class="fa-solid fa-chevron-left"></i></a>
+        </div>
+
+
+        <div class="page-number-box border-box flex-center">
+            <input class="page-number-input border-box base-color-size"
+                   type="number"
+                   value="3"
+                   min="1"
+                   max="3"
+            ><span class="delimiter base-color-size">/</span><span class="base-color-size">3</span>
+        </div>
+
+
+        <div class="btn-wrap">
+            <a class="jump-btn"
+               href="/"
+            ><i class="fa-solid fa-chevron-right"></i></a>
         </div>
     </div>
-    
+
 
 
 
@@ -255,7 +324,7 @@
 
     <!-- side tools -->
     <div class="side-tools">
-        <div class="side-tools-container border-box ">
+        <div class="side-tools-container border-box side-tools-show-handle">
     <ul class="side-tools-list side-tools-show-handle border-box">
         <li class="tools-item tool-font-adjust-plus flex-center">
             <i class="fas fa-search-plus"></i>
@@ -336,6 +405,7 @@
     <!-- tablet toc -->
     
 </main>
+
 
 
 

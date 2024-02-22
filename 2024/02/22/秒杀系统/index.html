@@ -203,13 +203,13 @@
         
             <span class="meta-info-item article-create-date">
                 <i class="icon fa-solid fa-calendar-check"></i>&nbsp;
-                <span class="pc">2023-12-04 22:07:55</span>
-                <span class="mobile">2023-12-04 22:07</span>
+                <span class="pc">2024-02-22 22:07:55</span>
+                <span class="mobile">2024-02-22 22:07</span>
             </span>
 
             <span class="meta-info-item article-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="pc" data-updated="Thu Feb 22 2024 21:26:04 GMT+0800">2024-02-22 21:26:04</span>
+                <span class="pc" data-updated="Thu Feb 22 2024 21:37:36 GMT+0800">2024-02-22 21:37:36</span>
             </span>
         
 
@@ -257,7 +257,7 @@
                 <div class="article-content keep-markdown-body">
                     
 
-                    <h1 id="1-设计难点"><a href="#1-设计难点" class="headerlink" title="1.设计难点"></a>1.设计难点</h1><ul>
+                    <h1 id="1-设计要点"><a href="#1-设计要点" class="headerlink" title="1.设计要点"></a>1.设计要点</h1><ul>
 <li>秒杀开始时会有大量的用户请求进入，需要保证系统满足<strong>高并发和高性能</strong>。</li>
 <li>为了保证秒杀流程的顺利进行，整个秒杀系统必须保证满足<strong>高可用</strong>。</li>
 <li>由于商品库存有限，在面对大量的订单的情况下，不能出现超卖情况，需要保证<strong>一致性</strong>。</li>
@@ -271,27 +271,27 @@
 <li>商品的库存有限，在面对大量订单请求的情况下，如何避免出现超卖情况，保证一致性？</li>
 <li>如何保证接口幂等，避免统一用户重复参与秒杀？</li>
 </ul>
-<h1 id="3-解决思路"><a href="#3-解决思路" class="headerlink" title="3.解决思路"></a>3.解决思路</h1><h2 id="1-热key"><a href="#1-热key" class="headerlink" title="1.热key"></a>1.热key</h2><ul>
+<h1 id="3-解决思路"><a href="#3-解决思路" class="headerlink" title="3.解决思路"></a>3.解决思路</h1><h2 id="3-1-热key"><a href="#3-1-热key" class="headerlink" title="3.1.热key"></a>3.1.热key</h2><ul>
 <li>1.热key通常可分为静态热key(提前预测到的)和动态热key（不能提前预测到的）。</li>
 <li>2.对于动态热key，需要动态检测，可通过将redis请求经过代理的方式进行统计上报。</li>
 <li>3.热key的常用解决办法是添加到系统本地缓存</li>
 </ul>
-<h2 id="2-高可用"><a href="#2-高可用" class="headerlink" title="2.高可用"></a>2.高可用</h2><ul>
+<h2 id="3-2-高可用"><a href="#3-2-高可用" class="headerlink" title="3.2.高可用"></a>3.2.高可用</h2><ul>
 <li>主从复制，分库分表等</li>
 </ul>
-<h2 id="3-限流策略"><a href="#3-限流策略" class="headerlink" title="3.限流策略"></a>3.限流策略</h2><ul>
+<h2 id="3-3-限流策略"><a href="#3-3-限流策略" class="headerlink" title="3.3.限流策略"></a>3.3.限流策略</h2><ul>
 <li>最好使用本地缓存进行限流，避免查redis又消耗系统资源</li>
 <li><strong>常用限流策略</strong></li>
 </ul>
-<h2 id="4-消息队列削峰处理"><a href="#4-消息队列削峰处理" class="headerlink" title="4.消息队列削峰处理"></a>4.消息队列削峰处理</h2><ul>
+<h2 id="3-4-消息队列削峰处理"><a href="#3-4-消息队列削峰处理" class="headerlink" title="3.4.消息队列削峰处理"></a>3.4.消息队列削峰处理</h2><ul>
 <li><strong>消息队列相关</strong></li>
 </ul>
-<h2 id="5-避免超卖，保证一致性"><a href="#5-避免超卖，保证一致性" class="headerlink" title="5.避免超卖，保证一致性"></a>5.避免超卖，保证一致性</h2><ul>
+<h2 id="3-5-避免超卖，保证一致性"><a href="#3-5-避免超卖，保证一致性" class="headerlink" title="3.5.避免超卖，保证一致性"></a>3.5.避免超卖，保证一致性</h2><ul>
 <li>下单即减库存，超时未付款再释放库存</li>
 <li>付款再减库存，可能出现下单成功，付款失败的情况，影响用户体验</li>
 <li>考虑适当增多下单成功的用户请求，避免出现少卖情况</li>
 </ul>
-<h2 id="6-接口幂等，保证一致性"><a href="#6-接口幂等，保证一致性" class="headerlink" title="6.接口幂等，保证一致性"></a>6.接口幂等，保证一致性</h2><ul>
+<h2 id="3-6-接口幂等，保证一致性"><a href="#3-6-接口幂等，保证一致性" class="headerlink" title="3.6.接口幂等，保证一致性"></a>3.6.接口幂等，保证一致性</h2><ul>
 <li>uid维度设置分布式锁</li>
 <li>下单付款成功后记录订单号，防止重复下单</li>
 </ul>
@@ -325,14 +325,14 @@
                             <div class="article-prev">
                                 <a class="prev"
                                    rel="prev"
-                                   href="/2023/12/04/%E6%8C%87%E9%92%88/"
-                                   title="指针"
+                                   href="/2024/02/22/Feed%E6%B5%81%E7%B3%BB%E7%BB%9F/"
+                                   title="Feed流系统"
                                 >
                                     <span class="left arrow-icon flex-center">
                                       <i class="fas fa-chevron-left"></i>
                                     </span>
                                             <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">指针</span>
+                                        <span class="post-nav-title-item text-ellipsis">Feed流系统</span>
                                         <span class="post-nav-item">上一篇</span>
                                     </span>
                                 </a>
@@ -342,11 +342,11 @@
                             <div class="article-next">
                                 <a class="next"
                                    rel="next"
-                                   href="/2023/11/27/socat/"
-                                   title="socat"
+                                   href="/2023/12/05/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/"
+                                   title="分布式锁"
                                 >
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">socat</span>
+                                        <span class="post-nav-title-item text-ellipsis">分布式锁</span>
                                         <span class="post-nav-item">下一篇</span>
                                     </span>
                                             <span class="right arrow-icon flex-center">
@@ -374,7 +374,7 @@
             <div class="pc-post-toc right-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E8%AE%BE%E8%AE%A1%E9%9A%BE%E7%82%B9"><span class="nav-text">1.设计难点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E5%8F%AF%E8%83%BD%E9%9C%80%E8%A6%81%E8%80%83%E8%99%91%E7%9A%84%E7%82%B9"><span class="nav-text">2.可能需要考虑的点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E8%A7%A3%E5%86%B3%E6%80%9D%E8%B7%AF"><span class="nav-text">3.解决思路</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%83%ADkey"><span class="nav-text">1.热key</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E9%AB%98%E5%8F%AF%E7%94%A8"><span class="nav-text">2.高可用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E9%99%90%E6%B5%81%E7%AD%96%E7%95%A5"><span class="nav-text">3.限流策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%89%8A%E5%B3%B0%E5%A4%84%E7%90%86"><span class="nav-text">4.消息队列削峰处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E9%81%BF%E5%85%8D%E8%B6%85%E5%8D%96%EF%BC%8C%E4%BF%9D%E8%AF%81%E4%B8%80%E8%87%B4%E6%80%A7"><span class="nav-text">5.避免超卖，保证一致性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E6%8E%A5%E5%8F%A3%E5%B9%82%E7%AD%89%EF%BC%8C%E4%BF%9D%E8%AF%81%E4%B8%80%E8%87%B4%E6%80%A7"><span class="nav-text">6.接口幂等，保证一致性</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E8%AE%BE%E8%AE%A1%E8%A6%81%E7%82%B9"><span class="nav-text">1.设计要点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E5%8F%AF%E8%83%BD%E9%9C%80%E8%A6%81%E8%80%83%E8%99%91%E7%9A%84%E7%82%B9"><span class="nav-text">2.可能需要考虑的点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E8%A7%A3%E5%86%B3%E6%80%9D%E8%B7%AF"><span class="nav-text">3.解决思路</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E7%83%ADkey"><span class="nav-text">3.1.热key</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E9%AB%98%E5%8F%AF%E7%94%A8"><span class="nav-text">3.2.高可用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-%E9%99%90%E6%B5%81%E7%AD%96%E7%95%A5"><span class="nav-text">3.3.限流策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%89%8A%E5%B3%B0%E5%A4%84%E7%90%86"><span class="nav-text">3.4.消息队列削峰处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5-%E9%81%BF%E5%85%8D%E8%B6%85%E5%8D%96%EF%BC%8C%E4%BF%9D%E8%AF%81%E4%B8%80%E8%87%B4%E6%80%A7"><span class="nav-text">3.5.避免超卖，保证一致性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-6-%E6%8E%A5%E5%8F%A3%E5%B9%82%E7%AD%89%EF%BC%8C%E4%BF%9D%E8%AF%81%E4%B8%80%E8%87%B4%E6%80%A7"><span class="nav-text">3.6.接口幂等，保证一致性</span></a></li></ol></li></ol>
     </div>
 </div>
 
@@ -543,7 +543,7 @@
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E8%AE%BE%E8%AE%A1%E9%9A%BE%E7%82%B9"><span class="nav-text">1.设计难点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E5%8F%AF%E8%83%BD%E9%9C%80%E8%A6%81%E8%80%83%E8%99%91%E7%9A%84%E7%82%B9"><span class="nav-text">2.可能需要考虑的点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E8%A7%A3%E5%86%B3%E6%80%9D%E8%B7%AF"><span class="nav-text">3.解决思路</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%83%ADkey"><span class="nav-text">1.热key</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E9%AB%98%E5%8F%AF%E7%94%A8"><span class="nav-text">2.高可用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E9%99%90%E6%B5%81%E7%AD%96%E7%95%A5"><span class="nav-text">3.限流策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%89%8A%E5%B3%B0%E5%A4%84%E7%90%86"><span class="nav-text">4.消息队列削峰处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E9%81%BF%E5%85%8D%E8%B6%85%E5%8D%96%EF%BC%8C%E4%BF%9D%E8%AF%81%E4%B8%80%E8%87%B4%E6%80%A7"><span class="nav-text">5.避免超卖，保证一致性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E6%8E%A5%E5%8F%A3%E5%B9%82%E7%AD%89%EF%BC%8C%E4%BF%9D%E8%AF%81%E4%B8%80%E8%87%B4%E6%80%A7"><span class="nav-text">6.接口幂等，保证一致性</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E8%AE%BE%E8%AE%A1%E8%A6%81%E7%82%B9"><span class="nav-text">1.设计要点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E5%8F%AF%E8%83%BD%E9%9C%80%E8%A6%81%E8%80%83%E8%99%91%E7%9A%84%E7%82%B9"><span class="nav-text">2.可能需要考虑的点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E8%A7%A3%E5%86%B3%E6%80%9D%E8%B7%AF"><span class="nav-text">3.解决思路</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E7%83%ADkey"><span class="nav-text">3.1.热key</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E9%AB%98%E5%8F%AF%E7%94%A8"><span class="nav-text">3.2.高可用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-%E9%99%90%E6%B5%81%E7%AD%96%E7%95%A5"><span class="nav-text">3.3.限流策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%89%8A%E5%B3%B0%E5%A4%84%E7%90%86"><span class="nav-text">3.4.消息队列削峰处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5-%E9%81%BF%E5%85%8D%E8%B6%85%E5%8D%96%EF%BC%8C%E4%BF%9D%E8%AF%81%E4%B8%80%E8%87%B4%E6%80%A7"><span class="nav-text">3.5.避免超卖，保证一致性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-6-%E6%8E%A5%E5%8F%A3%E5%B9%82%E7%AD%89%EF%BC%8C%E4%BF%9D%E8%AF%81%E4%B8%80%E8%87%B4%E6%80%A7"><span class="nav-text">3.6.接口幂等，保证一致性</span></a></li></ol></li></ol>
     </div>
 </div>
 

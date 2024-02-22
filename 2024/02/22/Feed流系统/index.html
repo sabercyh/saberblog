@@ -9,7 +9,7 @@
     
     <title>
         
-            标签: 系统设计 |
+            Feed流系统 |
         
         saberblog
     </title>
@@ -160,44 +160,198 @@
                 
 
                     <div class="fade-in-down-animation">
-    <div class="tag-container border-box">
-        <div class="tag-name"><i class="fas fa-hashtag"></i>&nbsp;系统设计
-        </div>
-        <div class="tag-post-list">
+    <div class="post-page-container border-box">
+
+        <div class="article-content-container border-box">
+
             
-<div class="archive-list-container border-box">
-    
-        <section class="archive-item border-box">
-            <div class="archive-item-header border-box">
-                <span class="archive-year">2024</span>
-            </div>
-            <ul class="article-list border-box">
+                <div class="article-content-top border-box"
+                     style="height: 120px"
+                >
+                    <div class="cover-article-title">
+                        Feed流系统
+                    </div>
+                    <img class="post-cover" src="https://saberblog-1309873493.cos.ap-beijing.myqcloud.com//bg1.png"
+                         onerror="this.style.display='none'"
+                    >
+                </div>
+            
+
+            <div class="article-content-bottom border-box has-cover">
                 
-                    <li class="article-item border-box">
-                        <span class="article-date border-box">02-22</span>
-                        <a class="article-title border-box text-ellipsis"
-                           href="/2024/02/22/Feed%E6%B5%81%E7%B3%BB%E7%BB%9F/"
-                        >Feed流系统</a>
-                    </li>
+
                 
-                    <li class="article-item border-box">
-                        <span class="article-date border-box">02-22</span>
-                        <a class="article-title border-box text-ellipsis"
-                           href="/2024/02/22/%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F/"
-                        >秒杀系统</a>
-                    </li>
-                
-            </ul>
-        </section>
+                    <div class="article-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="/images/avatar.svg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author">
+                                <span class="name">saber</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="article-meta-info-container border-box post">
+    <div class="article-meta-info border-box">
+        
+
+
+        
+            <span class="meta-info-item article-create-date">
+                <i class="icon fa-solid fa-calendar-check"></i>&nbsp;
+                <span class="pc">2024-02-22 22:07:55</span>
+                <span class="mobile">2024-02-22 22:07</span>
+            </span>
+
+            <span class="meta-info-item article-update-date">
+                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                <span class="pc" data-updated="Thu Feb 22 2024 21:43:37 GMT+0800">2024-02-22 21:43:37</span>
+            </span>
+        
+
+        
+            <span class="meta-info-item article-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="article-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">系统设计</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="article-tag meta-info-item border-box">
+                <i class="icon fas fa-tags"></i>&nbsp;
+                <ul class="article-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">系统设计</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+            <span class="meta-info-item article-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
     
 </div>
 
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="article-content keep-markdown-body">
+                    
+
+                    <h1 id="1-设计要点"><a href="#1-设计要点" class="headerlink" title="1.设计要点"></a>1.设计要点</h1><ul>
+<li>需要保证<strong>实时性</strong>，关注的人发送了信息，用户需要在短时间内可收到</li>
+<li><strong>高并发</strong></li>
+<li><strong>性能要求高</strong>，信息流需要通过聚合大量数据生成，需要查询多次缓存、数据库、计数器，且需要保证在高并发请求下以低响应时间返回信息流结果。</li>
+</ul>
+<h1 id="2-可能需要考虑的点"><a href="#2-可能需要考虑的点" class="headerlink" title="2.可能需要考虑的点"></a>2.可能需要考虑的点</h1><ul>
+<li>针对有大量粉丝的大V用户，如何处理其发送的动态信息？</li>
+<li>针对用户一般通过维护一个inbox来存储其将会受到的动态信息，使用什么组件来存储？</li>
+<li>高可用？</li>
+</ul>
+<h1 id="3-解决思路"><a href="#3-解决思路" class="headerlink" title="3.解决思路"></a>3.解决思路</h1><h2 id="3-1-消息推送的方式"><a href="#3-1-消息推送的方式" class="headerlink" title="3.1 消息推送的方式"></a>3.1 消息推送的方式</h2><blockquote>
+<p>一般分为三种，推、拉、推拉混合。</p>
+</blockquote>
+<ul>
+<li>推模式即用户每发送一条动态就推送给其关注者，对大V用户而言会产生千万条插入数据，效率较低。</li>
+<li>拉模式即用户刷新获取Feed流信息时统计其关注列表发送的所有动态信息，并按时间排序生成最终结果并展示，由于需要查询计算并排序，响应时间较长，对用户来说体验不佳。</li>
+<li>推拉混合方式，针对大V的活跃粉丝用户使用推模式，非活跃粉丝使用拉模式获取。</li>
+</ul>
+<h2 id="3-2-组件"><a href="#3-2-组件" class="headerlink" title="3.2 组件"></a>3.2 组件</h2><ul>
+<li><strong>redis相关，list结构</strong></li>
+<li><strong>消息队列</strong></li>
+</ul>
+<h2 id="3-3-高可用"><a href="#3-3-高可用" class="headerlink" title="3.3 高可用"></a>3.3 高可用</h2><ul>
+<li>读写分离、分库分表等</li>
+</ul>
+
+                </div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">系统设计</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="article-nav">
+                        
+                        
+                            <div class="article-next">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2024/02/22/%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F/"
+                                   title="秒杀系统"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">秒杀系统</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                            <span class="right arrow-icon flex-center">
+                                      <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
         </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E8%AE%BE%E8%AE%A1%E8%A6%81%E7%82%B9"><span class="nav-text">1.设计要点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E5%8F%AF%E8%83%BD%E9%9C%80%E8%A6%81%E8%80%83%E8%99%91%E7%9A%84%E7%82%B9"><span class="nav-text">2.可能需要考虑的点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E8%A7%A3%E5%86%B3%E6%80%9D%E8%B7%AF"><span class="nav-text">3.解决思路</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-text">3.1 消息推送的方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E7%BB%84%E4%BB%B6"><span class="nav-text">3.2 组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-%E9%AB%98%E5%8F%AF%E7%94%A8"><span class="nav-text">3.3 高可用</span></a></li></ol></li></ol>
     </div>
-    
+</div>
 
-
-
+            </div>
+        
+    </div>
 </div>
 
 
@@ -252,6 +406,23 @@
 
     <!-- post tools -->
     
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="tools-list border-box">
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
 
     <!-- side tools -->
     <div class="side-tools">
@@ -278,6 +449,10 @@
     </ul>
 
     <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
         
 
         
@@ -335,6 +510,17 @@
 
     <!-- tablet toc -->
     
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E8%AE%BE%E8%AE%A1%E8%A6%81%E7%82%B9"><span class="nav-text">1.设计要点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E5%8F%AF%E8%83%BD%E9%9C%80%E8%A6%81%E8%80%83%E8%99%91%E7%9A%84%E7%82%B9"><span class="nav-text">2.可能需要考虑的点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E8%A7%A3%E5%86%B3%E6%80%9D%E8%B7%AF"><span class="nav-text">3.解决思路</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-text">3.1 消息推送的方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E7%BB%84%E4%BB%B6"><span class="nav-text">3.2 组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-%E9%AB%98%E5%8F%AF%E7%94%A8"><span class="nav-text">3.3 高可用</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
 </main>
 
 
@@ -358,6 +544,20 @@
 
 
 <div class="pjax">
+    
+        <!-- post-helper -->
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.8.5/source/js/post/post-helper.js"></script>
+
+        <!-- toc -->
+        
+            <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.8.5/source/js/post/toc.js"></script>
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
     
 
     <!-- category-page -->
