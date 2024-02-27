@@ -209,7 +209,7 @@
 
             <span class="meta-info-item article-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="pc" data-updated="Tue Feb 27 2024 11:08:26 GMT+0800">2024-02-27 11:08:26</span>
+                <span class="pc" data-updated="Tue Feb 27 2024 11:14:48 GMT+0800">2024-02-27 11:14:48</span>
             </span>
         
 
@@ -267,10 +267,12 @@
 <li>dp数组含义：dp[i]表示以nums[i]结尾的最长递增子序列的长度</li>
 <li>dp数组初始化：dp[i] &#x3D; 1</li>
 <li>状态转移方程：dp[i] &#x3D; max(dp[j]) + 1, 0 &lt;&#x3D; j &lt; i且nums[i] &gt; nums[j]</li>
-<li>返回结果：max(dp[i])<blockquote>
+<li>返回结果：max(dp[i])</li>
+</ul>
+<blockquote>
 <p>LC673 最长递增子序列个数</p>
 </blockquote>
-</li>
+<ul>
 <li>dp数组含义：dp[i][0]表示以nums[i]结尾的最长递增子序列的长度，dp[i][1]表示以nums[i]结尾的最长递增子序列的个数</li>
 <li>dp数组初始化：dp[i][0] &#x3D; 1, dp[i][1] &#x3D; 1</li>
 <li>状态转移方程：dp[i][0] &#x3D; max(dp[j][0] + 1, dp[i][0]), 0 &lt;&#x3D; j &lt; i且nums[i] &gt; nums[j],对应dp[i][1] &#x3D; dp[j][1]或dp[i][1] +&#x3D; dp[j][1]</li>
@@ -290,10 +292,12 @@
 <li>dp数组含义：dp[i+1][j+1]表示以nums1[i]，nums2[j]结尾的最长重复子数组的长度</li>
 <li>dp数组初始化：<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dp := <span class="built_in">make</span>([][]<span class="type">int</span>, <span class="built_in">len</span>(nums1)+<span class="number">1</span>)</span><br><span class="line"><span class="keyword">for</span> i := <span class="keyword">range</span> dp &#123;</span><br><span class="line">    dp[i] = <span class="built_in">make</span>([]<span class="type">int</span>, <span class="built_in">len</span>(nums2)+<span class="number">1</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//初始默认为0表示数组为空时重复子数组长度为0</span></span><br></pre></td></tr></table></figure></li>
 <li>状态转移方程：<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> nums1[i] == nums2[j] &#123;</span><br><span class="line">    dp[i+<span class="number">1</span>][j+<span class="number">1</span>] = dp[i][j]+<span class="number">1</span></span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    dp[i+<span class="number">1</span>][j+<span class="number">1</span>] = <span class="number">0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>返回结果：max(dp[i][j])<blockquote>
+<li>返回结果：max(dp[i][j])</li>
+</ul>
+<blockquote>
 <p>LC1143 最长公共子序列</p>
 </blockquote>
-</li>
+<ul>
 <li>dp数组含义：dp[i+1][j+1]表示以text1[i]，text2[j]结尾的最长公共子序列的长度</li>
 <li>dp数组初始化：<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dp := <span class="built_in">make</span>([][]<span class="type">int</span>, <span class="built_in">len</span>(text1)+<span class="number">1</span>)</span><br><span class="line"><span class="keyword">for</span> i := <span class="keyword">range</span> dp &#123;</span><br><span class="line">    dp[i] = <span class="built_in">make</span>([]<span class="type">int</span>, <span class="built_in">len</span>(text2)+<span class="number">1</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//初始默认为0表示数组为空时公共子序列长度为0</span></span><br></pre></td></tr></table></figure></li>
 <li>状态转移方程：<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> text1[i] == text2[j] &#123;</span><br><span class="line">    dp[i+<span class="number">1</span>][j+<span class="number">1</span>] = dp[i][j]+<span class="number">1</span></span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    dp[i+<span class="number">1</span>][j+<span class="number">1</span>] = max(dp[i][j+<span class="number">1</span>], dp[i+<span class="number">1</span>][j])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
@@ -343,8 +347,9 @@
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[<span class="number">1</span>],dp[<span class="number">2</span>],dp[<span class="number">3</span>] = <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span></span><br></pre></td></tr></table></figure>
 <p>状态转移方程：dp[i] &#x3D; max(dp[i],dp[j]*dp[i-j])<br>返回结果：dp[n]</p>
 <h1 id="5-地下城游戏"><a href="#5-地下城游戏" class="headerlink" title="5. 地下城游戏"></a>5. 地下城游戏</h1><blockquote>
-<p>LC174 地下城游戏<br>需要特别考虑遍历顺序</p>
+<p>LC174 地下城游戏</p>
 </blockquote>
+<p>需要特别考虑遍历顺序</p>
 <ul>
 <li><p>dp数组含义：dp[i][j]表示到该房间所需的最小HP</p>
 </li>
