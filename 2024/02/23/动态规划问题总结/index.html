@@ -209,7 +209,7 @@
 
             <span class="meta-info-item article-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="pc" data-updated="Mon Feb 26 2024 09:40:04 GMT+0800">2024-02-26 09:40:04</span>
+                <span class="pc" data-updated="Tue Feb 27 2024 11:00:55 GMT+0800">2024-02-27 11:00:55</span>
             </span>
         
 
@@ -287,6 +287,20 @@
 <li>dp数组初始化：<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dp := <span class="built_in">make</span>([][]<span class="type">int</span>, <span class="built_in">len</span>(text1)+<span class="number">1</span>)</span><br><span class="line"><span class="keyword">for</span> i := <span class="keyword">range</span> dp &#123;</span><br><span class="line">    dp[i] = <span class="built_in">make</span>([]<span class="type">int</span>, <span class="built_in">len</span>(text2)+<span class="number">1</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//初始默认为0表示数组为空时公共子序列长度为0</span></span><br></pre></td></tr></table></figure></li>
 <li>状态转移方程：<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> text1[i] == text2[j] &#123;</span><br><span class="line">    dp[i+<span class="number">1</span>][j+<span class="number">1</span>] = dp[i][j]+<span class="number">1</span></span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    dp[i+<span class="number">1</span>][j+<span class="number">1</span>] = max(dp[i][j+<span class="number">1</span>], dp[i+<span class="number">1</span>][j])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li>返回结果：max(dp[i][j])</li>
+</ul>
+<p>LC5 最长回文子串</p>
+<ul>
+<li>dp数组含义：dp[start][end]表示以start为起始位置，end为结尾的子串是否回文</li>
+<li>dp数组初始化：长度为1的字符串默认回文，因此初始化dp[i][i] &#x3D; 1</li>
+<li>状态转移方程：<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> end - start + <span class="number">1</span> &lt; <span class="number">2</span>&#123;</span><br><span class="line">    dp[start][end] = <span class="literal">true</span></span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    dp[start][end] = dp[start+<span class="number">1</span>][end<span class="number">-1</span>]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> dp[start][end] &amp;&amp; end - start + <span class="number">1</span> &gt; maxLen&#123;</span><br><span class="line">    res = s[start:end+<span class="number">1</span>]</span><br><span class="line">    maxLen = end - start + <span class="number">1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>返回结果：res</li>
+</ul>
+<p>LC53 最大子数组和</p>
+<ul>
+<li>dp数组含义：dp[i]表示以nums[i]结尾的子数组和的最大值</li>
+<li>dp数组初始化：dp[0] &#x3D; nums[0]</li>
+<li>状态转移方程：dp[i] &#x3D; max(dp[i-1]+nums[i],nums[i])</li>
+<li>返回结果：max(dp[i])</li>
 </ul>
 <h1 id="3-股票问题（状态DP）"><a href="#3-股票问题（状态DP）" class="headerlink" title="3.股票问题（状态DP）"></a>3.股票问题（状态DP）</h1><h2 id="3-1-最多k次买卖"><a href="#3-1-最多k次买卖" class="headerlink" title="3.1 最多k次买卖"></a>3.1 最多k次买卖</h2><p>LC121 买卖股票的最佳时机(最多一次)<br>LC123 买卖股票的最佳时机 III(最多两次)<br>LC188 买卖股票的最佳时机 IV(最多k次)</p>
 <p>动归通用解：</p>
